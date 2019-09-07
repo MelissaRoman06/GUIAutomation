@@ -3,10 +3,8 @@ package calculadora.ui.pages;
 import calculadora.ui.utils.Operations;
 import calculadora.ui.utils.OperatorXPath;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 /**
  * CalculadoraPage class models calculadora.org.
@@ -14,8 +12,7 @@ import org.openqa.selenium.support.PageFactory;
  * @author Melissa Román
  * @version 1.0
  */
-public class CalculadoraPage {
-    private WebDriver driver;
+public class CalculadoraPage extends BasePage{
     private OperatorXPath operatorXPath;
 
     /**
@@ -43,14 +40,12 @@ public class CalculadoraPage {
     WebElement pointKey;
 
     /**
-     * Constructs the page with a web driver as input.
-     *
-     * @param driver - Web driver to de used.
+     * Constructs the page asking for a web driver to web driver manager.
      */
-    public CalculadoraPage(WebDriver driver) {
-        this.driver = driver;
+    public CalculadoraPage() {
+        super();
+        this.driver.get("https://www.calculadora.org/");
         operatorXPath = new OperatorXPath();
-        PageFactory.initElements(driver, this);
     }
 
     /**

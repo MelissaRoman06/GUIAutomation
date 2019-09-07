@@ -1,7 +1,5 @@
 package core.selenium.webdrivers;
 
-import calculadora.ui.utils.Operations;
-
 import java.util.HashMap;
 import java.util.Map;
 
