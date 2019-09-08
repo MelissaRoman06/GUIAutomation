@@ -1,4 +1,4 @@
-package calculadora.ui.pages;
+package theNinjaStore.ui.pages;
 
 import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebDriver;

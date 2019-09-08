@@ -1,6 +1,7 @@
 package steps;
 
-import calculadora.ui.pages.LoginPage;
+import theNinjaStore.ui.pages.LoginPage;
+import theNinjaStore.ui.utils.NinjaStoreConfig;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -17,8 +18,8 @@ public class LoginSteps {
 
     @Given("the user enters his email and password")
     public void theUserEntersHisEmailAndPassword() {
-        loginPage.enterEmail("melissa.roman@fundacion-jala.org");
-        loginPage.enterPassword("m8046119R");
+        loginPage.enterEmail(NinjaStoreConfig.getInstance().getEmail());
+        loginPage.enterPassword(NinjaStoreConfig.getInstance().getPassword());
     }
 
     @When("the user presses login button")
@@ -26,8 +27,8 @@ public class LoginSteps {
         loginPage.pressLoginButton();
     }
 
-    @Then("{string} text is displayed")
-    public void textIsDisplayed(String tittle) {
-        assertThat(loginPage.getText(), is(tittle));
+    @Then("user login successfully")
+    public void userLoginSuccessfully() {
+        assertThat(loginPage.getText(), is("My Account"));
     }
 }

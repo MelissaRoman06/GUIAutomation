@@ -1,4 +1,4 @@
-package calculadora.ui.pages;
+package theNinjaStore.ui.pages;
 
 public class PageTransporter {
 }

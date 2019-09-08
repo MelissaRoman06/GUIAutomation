@@ -1,4 +1,4 @@
-package calculadora.ui.utils;
+package theNinjaStore.ui.utils;
 
 import java.util.HashMap;
 import java.util.Map;

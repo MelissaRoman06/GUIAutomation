@@ -1,5 +1,5 @@
-import calculadora.ui.pages.CalculadoraPage;
-import calculadora.ui.utils.Operations;
+import theNinjaStore.ui.pages.CalculadoraPage;
+import theNinjaStore.ui.utils.Operations;
 
 import core.selenium.WebDriverManager;
 import org.junit.AfterClass;
@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * This class contains all tests to be performed to calculadora.org.
+ * This class contains all tests to be performed to theNinjaStore.org.
  *
  * @author Melissa Román
  * @version 1.0

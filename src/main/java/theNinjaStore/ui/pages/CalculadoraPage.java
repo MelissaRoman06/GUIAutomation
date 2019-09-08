@@ -1,13 +1,13 @@
-package calculadora.ui.pages;
+package theNinjaStore.ui.pages;
 
-import calculadora.ui.utils.Operations;
-import calculadora.ui.utils.OperatorXPath;
+import theNinjaStore.ui.utils.Operations;
+import theNinjaStore.ui.utils.OperatorXPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * CalculadoraPage class models calculadora.org.
+ * CalculadoraPage class models theNinjaStore.org.
  *
  * @author Melissa Román
  * @version 1.0

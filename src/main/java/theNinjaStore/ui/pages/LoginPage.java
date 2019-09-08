@@ -1,9 +1,10 @@
-package calculadora.ui.pages;
+package theNinjaStore.ui.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage{
+    private LoginPage loginPage;
     @FindBy(id = "input-email")
     WebElement emailBox;
 
@@ -24,7 +25,6 @@ public class LoginPage extends BasePage{
     public void enterEmail(String email) {
         emailBox.click();
         emailBox.sendKeys(email);
-
     }
 
     public void enterPassword(String password) {
@@ -41,5 +41,16 @@ public class LoginPage extends BasePage{
 
     public String getText() {
         return myAccountTittle.getText();
+    }
+
+    @FindBy(css = ".dropdown .hidden-xs")
+    WebElement accountDropDownMenu;
+
+    @FindBy(linkText = "Logout")
+    WebElement logoutButton;
+
+    public void logout() {
+        accountDropDownMenu.click();
+        logoutButton.click();
     }
 }
