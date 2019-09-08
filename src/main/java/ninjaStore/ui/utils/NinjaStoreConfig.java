@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Jala Foundation.
  */
-package theNinjaStore.ui.utils;
+package ninjaStore.ui.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;

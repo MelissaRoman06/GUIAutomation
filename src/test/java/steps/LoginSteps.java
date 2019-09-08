@@ -12,8 +12,8 @@
 package steps;
 
 import org.testng.Assert;
-import theNinjaStore.ui.pages.LoginPage;
-import theNinjaStore.ui.utils.NinjaStoreConfig;
+import ninjaStore.ui.pages.LoginPage;
+import ninjaStore.ui.utils.NinjaStoreConfig;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Jala Foundation.
  */
-package theNinjaStore.ui.pages;
+package ninjaStore.ui.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,8 +21,6 @@ import org.openqa.selenium.support.FindBy;
  * @version 1.0
  */
 public class LoginPage extends BasePage {
-    private LoginPage loginPage;
-
     /**
      * Finds the email box.
      */
