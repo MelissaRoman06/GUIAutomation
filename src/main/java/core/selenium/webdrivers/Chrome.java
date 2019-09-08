@@ -27,6 +27,7 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class Chrome implements IBrowser {
+
     /**
      * Initializes Chrome driver.
      *

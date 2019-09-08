@@ -11,5 +11,11 @@
  */
 package runner;
 
+/**
+ * RunCukesTest class.
+ *
+ * @author Melissa Román
+ * @version 1.0
+ */
 public class RunCukesTest {
 }

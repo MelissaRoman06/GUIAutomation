@@ -13,5 +13,11 @@ package hooks;
 
 import cucumber.api.java.After;
 
+/**
+ * Hooks class.
+ *
+ * @author Melissa Román
+ * @version 1.0
+ */
 public class Hooks {
 }

@@ -11,5 +11,11 @@
  */
 package ninjaStore.ui.pages;
 
+/**
+ * PageTransporter class.
+ *
+ * @author Melissa Román
+ * @version 1.0
+ */
 public class PageTransporter {
 }
