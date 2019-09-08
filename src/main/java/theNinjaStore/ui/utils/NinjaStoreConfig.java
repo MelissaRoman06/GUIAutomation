@@ -1,3 +1,14 @@
+/*
+ * @(#) NinjaStoreConfig.java Copyright (c) 2019 Jala Foundation.
+ * 2643 Av. Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of
+ * Jala Foundation, ("Confidential Information").  You shall not
+ * disclose such Confidential Information and shall use it only in
+ * accordance with the terms of the license agreement you entered into
+ * with Jala Foundation.
+ */
 package theNinjaStore.ui.utils;
 
 import java.io.FileInputStream;
@@ -5,6 +16,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * NinjaStoreConfig class is charge of reading account credentials.
+ *
+ * @author Melissa Román
+ * @version 1.0
+ */
 public class NinjaStoreConfig {
     private String email;
     private String password;
@@ -18,7 +35,7 @@ public class NinjaStoreConfig {
     }
 
     /**
-     * Gets the instance of WebDriverConfig.
+     * Gets the instance of NinjaStoreConfig.
      *
      * @return configInstance.
      */
@@ -30,7 +47,7 @@ public class NinjaStoreConfig {
     }
 
     /**
-     * Reads properties file for Web Driver waits' config.
+     * Reads properties file for Ninja Store config.
      */
     public void readProperties() {
         try (InputStream input = new FileInputStream("ninjaStore.properties")) {
@@ -43,10 +60,20 @@ public class NinjaStoreConfig {
         }
     }
 
+    /**
+     * Allows to get properties email.
+     *
+     * @return - Properties email.
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Allows to get properties password.
+     *
+     * @return - Properties password.
+     */
     public String getPassword() {
         return password;
     }
