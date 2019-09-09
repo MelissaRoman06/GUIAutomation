@@ -21,7 +21,7 @@ import org.openqa.selenium.support.FindBy;
  * @version 1.0
  */
 public class LoginPage extends BasePage {
-    
+    private static LoginPage loginPageInstance;
     /**
      * Finds the email box.
      */
@@ -43,9 +43,21 @@ public class LoginPage extends BasePage {
     /**
      * Constructs the page and getting the page by url.
      */
-    public LoginPage() {
+    protected LoginPage() {
         super();
         this.driver.get("http://tutorialsninja.com/demo/index.php?route=account/login");
+    }
+
+    /**
+     * Gets the instance of LoginPage.
+     *
+     * @return configInstance.
+     */
+    public static LoginPage getInstance() {
+        if (loginPageInstance == null) {
+            loginPageInstance = new LoginPage();
+        }
+        return loginPageInstance;
     }
 
     /**
@@ -108,5 +120,9 @@ public class LoginPage extends BasePage {
     public void logout() {
         accountDropDownMenu.click();
         logoutButton.click();
+    }
+
+    public void quit() {
+        this.driver.quit();
     }
 }

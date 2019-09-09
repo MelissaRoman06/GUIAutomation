@@ -25,22 +25,14 @@ import cucumber.api.java.en.When;
  * @version 1.0
  */
 public class LoginSteps {
-    private LoginPage loginPage;
-
-    /**
-     * Constructor initializes loginPage.
-     */
-    public LoginSteps() {
-        loginPage = new LoginPage();
-    }
 
     /**
      * Enters credentials read on properties file.
      */
     @Given("the user enters his email and password")
     public void theUserEntersHisEmailAndPassword() {
-        loginPage.enterEmail(NinjaStoreConfig.getInstance().getEmail());
-        loginPage.enterPassword(NinjaStoreConfig.getInstance().getPassword());
+        LoginPage.getInstance().enterEmail(NinjaStoreConfig.getInstance().getEmail());
+        LoginPage.getInstance().enterPassword(NinjaStoreConfig.getInstance().getPassword());
     }
 
     /**
@@ -48,7 +40,7 @@ public class LoginSteps {
      */
     @When("the user presses login button")
     public void theUserPressesLoginButton() {
-        loginPage.pressLoginButton();
+        LoginPage.getInstance().pressLoginButton();
     }
 
     /**
@@ -56,6 +48,6 @@ public class LoginSteps {
      */
     @Then("successful login")
     public void userLoginSuccessfully() {
-        Assert.assertEquals(loginPage.getText(), "My Account", "Not successful login");
+        Assert.assertEquals(LoginPage.getInstance().getText(), "My Account", "Not successful login");
     }
 }

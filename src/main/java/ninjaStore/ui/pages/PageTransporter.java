@@ -18,4 +18,5 @@ package ninjaStore.ui.pages;
  * @version 1.0
  */
 public class PageTransporter {
+
 }

@@ -32,7 +32,7 @@ public class WebDriverConfig {
     /**
      * Constructor WebDriverConfig.
      */
-    protected WebDriverConfig() {
+    private WebDriverConfig() {
         readProperties();
     }
 
