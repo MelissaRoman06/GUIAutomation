@@ -23,11 +23,17 @@ import org.testng.annotations.AfterClass;
  */
 public class Hooks {
 
+    /**
+     * Logout from the session account.
+     */
     @After("@Login")
     public void logout() {
         LoginPage.getInstance().logout();
     }
 
+    /**
+     * Quits from the browser.
+     */
     @AfterClass
     public void quit() {
         LoginPage.getInstance().quit();

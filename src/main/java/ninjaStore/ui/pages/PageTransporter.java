@@ -15,12 +15,16 @@ import core.selenium.WebDriverManager;
 import ninjaStore.ui.utils.NinjaStoreConfig;
 
 /**
- * PageTransporter class.
+ * PageTransporter class is in charge of navigate through pages.
  *
  * @author Melissa Román
  * @version 1.0
  */
 public class PageTransporter {
+
+    /**
+     * Navigates to login page.
+     */
     public static void goToLoginPage() {
         WebDriverManager.getInstance().getWebDriver().get(NinjaStoreConfig.getInstance().getLoginURL());
     }

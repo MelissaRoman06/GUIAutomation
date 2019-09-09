@@ -22,6 +22,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class LoginPage extends BasePage {
     private static LoginPage loginPageInstance;
+
     /**
      * Finds the email box.
      */

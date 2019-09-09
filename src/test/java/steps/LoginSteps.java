@@ -53,6 +53,9 @@ public class LoginSteps {
         Assert.assertEquals(LoginPage.getInstance().getText(), "My Account", "Not successful login");
     }
 
+    /**
+     * Navigates to login page.
+     */
     @Given("the user goes to login page")
     public void theUserGoesToLoginPage() {
         PageTransporter.goToLoginPage();
