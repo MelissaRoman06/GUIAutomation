@@ -13,6 +13,7 @@ package hooks;
 
 import cucumber.api.java.After;
 import ninjaStore.ui.pages.LoginPage;
+import org.testng.annotations.AfterClass;
 
 /**
  * Hooks class.
@@ -21,9 +22,16 @@ import ninjaStore.ui.pages.LoginPage;
  * @version 1.0
  */
 public class Hooks {
+
     @After("@Login")
-    public void tearDown() {
-        System.out.println("entra al hook");
+    public void logout() {
+        LoginPage.getInstance().logout();
+    }
+
+    @AfterClass
+    public void quit() {
         LoginPage.getInstance().quit();
     }
+
+
 }

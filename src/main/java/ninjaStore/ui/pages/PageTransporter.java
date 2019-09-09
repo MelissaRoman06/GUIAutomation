@@ -11,6 +11,9 @@
  */
 package ninjaStore.ui.pages;
 
+import core.selenium.WebDriverManager;
+import ninjaStore.ui.utils.NinjaStoreConfig;
+
 /**
  * PageTransporter class.
  *
@@ -18,5 +21,7 @@ package ninjaStore.ui.pages;
  * @version 1.0
  */
 public class PageTransporter {
-
+    public static void goToLoginPage() {
+        WebDriverManager.getInstance().getWebDriver().get(NinjaStoreConfig.getInstance().getLoginURL());
+    }
 }

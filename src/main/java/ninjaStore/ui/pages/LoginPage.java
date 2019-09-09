@@ -45,7 +45,6 @@ public class LoginPage extends BasePage {
      */
     protected LoginPage() {
         super();
-        this.driver.get("http://tutorialsninja.com/demo/index.php?route=account/login");
     }
 
     /**

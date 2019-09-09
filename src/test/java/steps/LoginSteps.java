@@ -11,6 +11,8 @@
  */
 package steps;
 
+import cucumber.api.java.en.And;
+import ninjaStore.ui.pages.PageTransporter;
 import org.testng.Assert;
 import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.ui.utils.NinjaStoreConfig;
@@ -29,7 +31,7 @@ public class LoginSteps {
     /**
      * Enters credentials read on properties file.
      */
-    @Given("the user enters his email and password")
+    @And("the user enters his email and password")
     public void theUserEntersHisEmailAndPassword() {
         LoginPage.getInstance().enterEmail(NinjaStoreConfig.getInstance().getEmail());
         LoginPage.getInstance().enterPassword(NinjaStoreConfig.getInstance().getPassword());
@@ -49,5 +51,10 @@ public class LoginSteps {
     @Then("successful login")
     public void userLoginSuccessfully() {
         Assert.assertEquals(LoginPage.getInstance().getText(), "My Account", "Not successful login");
+    }
+
+    @Given("the user goes to login page")
+    public void theUserGoesToLoginPage() {
+        PageTransporter.goToLoginPage();
     }
 }
