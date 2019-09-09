@@ -20,31 +20,31 @@ import org.openqa.selenium.support.FindBy;
  * @author Melissa Román
  * @version 1.0
  */
-public class LoginPage extends BasePage {
+public final class LoginPage extends BasePage {
     private static LoginPage loginPageInstance;
 
     /**
      * Finds the email box.
      */
     @FindBy(id = "input-email")
-    WebElement emailBox;
+    private WebElement emailBox;
 
     /**
      * Finds the password box.
      */
     @FindBy(id = "input-password")
-    WebElement passwordBox;
+    private WebElement passwordBox;
 
     /**
      * Finds the login button.
      */
     @FindBy(css = ".btn:nth-child(3)")
-    WebElement loginButton;
+    private WebElement loginButton;
 
     /**
      * Constructs the page and getting the page by url.
      */
-    protected LoginPage() {
+    private LoginPage() {
         super();
     }
 
@@ -85,44 +85,5 @@ public class LoginPage extends BasePage {
      */
     public void pressLoginButton() {
         loginButton.click();
-    }
-
-    /**
-     * Finds tittle on account page.
-     */
-    @FindBy(css = "h2:nth-child(1)")
-    WebElement myAccountTittle;
-
-    /**
-     * Allows to get the text on page tittle.
-     *
-     * @return - Text on tittle.
-     */
-    public String getText() {
-        return myAccountTittle.getText();
-    }
-
-    /**
-     * Finds account drop down menu.
-     */
-    @FindBy(css = ".dropdown .hidden-xs")
-    WebElement accountDropDownMenu;
-
-    /**
-     * Finds logout option on menu.
-     */
-    @FindBy(linkText = "Logout")
-    WebElement logoutButton;
-
-    /**
-     * Allows to logout.
-     */
-    public void logout() {
-        accountDropDownMenu.click();
-        logoutButton.click();
-    }
-
-    public void quit() {
-        this.driver.quit();
     }
 }

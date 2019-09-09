@@ -23,7 +23,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Melissa Román
  * @version 1.0
  */
-public class WebDriverManager {
+public final class WebDriverManager {
     private WebDriver webDriver;
     private WebDriverWait webDriverWait;
     private static WebDriverManager driverManagerInstance;

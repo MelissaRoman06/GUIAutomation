@@ -22,7 +22,7 @@ import java.util.Properties;
  * @author Melissa Román
  * @version 1.0
  */
-public class WebDriverConfig {
+public final class WebDriverConfig {
     private int implicitWaitTime;
     private int explicitWaitTime;
     private int waitSleepTime;
