@@ -12,6 +12,8 @@
 package hooks;
 
 import cucumber.api.java.After;
+import ninjaStore.ui.pages.PageTransporter;
+import org.testng.annotations.AfterClass;
 
 /**
  * Hooks class.
@@ -20,4 +22,22 @@ import cucumber.api.java.After;
  * @version 1.0
  */
 public class Hooks {
+
+    /**
+     * Logout from the session account.
+     */
+    @After("@Login")
+    public void logout() {
+        PageTransporter.getInstance().logout();
+    }
+
+    /**
+     * Quits from the browser.
+     */
+    @AfterClass
+    public void quit() {
+        PageTransporter.getInstance().quit();
+    }
+
+
 }

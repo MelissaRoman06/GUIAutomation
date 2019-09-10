@@ -11,6 +11,8 @@
  */
 package ninjaStore.ui.utils;
 
+import ninjaStore.utils.EventLogger;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +25,8 @@ import java.util.Properties;
  * @version 1.0
  */
 public class NinjaStoreConfig {
+    private String baseURL;
+    private String loginURL;
     private String email;
     private String password;
     private static NinjaStoreConfig ninjaStoreConfigInstance;
@@ -53,11 +57,32 @@ public class NinjaStoreConfig {
         try (InputStream input = new FileInputStream("ninjaStore.properties")) {
             Properties properties = new Properties();
             properties.load(input);
+            baseURL = properties.getProperty("baseURL");
+            loginURL = properties.getProperty("loginURL");
             email = properties.getProperty("email");
             password = properties.getProperty("password");
         } catch (IOException ex) {
             ex.printStackTrace();
+            EventLogger.error("Data for URL and account couldn't be retrieved from properties file", ex);
         }
+    }
+
+    /**
+     * Allows to get properties login page URL.
+     *
+     * @return - Properties login page URL.
+     */
+    public String getLoginURL() {
+        return loginURL;
+    }
+
+    /**
+     * Allows to get properties base URL.
+     *
+     * @return - Properties base URL.
+     */
+    public String getBaseURL() {
+        return baseURL;
     }
 
     /**

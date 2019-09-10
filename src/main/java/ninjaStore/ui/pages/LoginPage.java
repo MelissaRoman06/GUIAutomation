@@ -20,52 +20,44 @@ import org.openqa.selenium.support.FindBy;
  * @author Melissa Román
  * @version 1.0
  */
-public class LoginPage extends BasePage {
-    
+public final class LoginPage extends BasePage {
+    private static LoginPage loginPageInstance;
+
     /**
      * Finds the email box.
      */
     @FindBy(id = "input-email")
-    WebElement emailBox;
+    private WebElement emailBox;
 
     /**
      * Finds the password box.
      */
     @FindBy(id = "input-password")
-    WebElement passwordBox;
+    private WebElement passwordBox;
 
     /**
      * Finds the login button.
      */
     @FindBy(css = ".btn:nth-child(3)")
-    WebElement loginButton;
+    private WebElement loginButton;
 
     /**
      * Constructs the page and getting the page by url.
      */
-    public LoginPage() {
+    private LoginPage() {
         super();
-        this.driver.get("http://tutorialsninja.com/demo/index.php?route=account/login");
     }
 
     /**
-     * Enters the email according to input string.
+     * Gets the instance of LoginPage.
      *
-     * @param email - Email to be entered.
+     * @return configInstance.
      */
-    public void enterEmail(String email) {
-        emailBox.click();
-        emailBox.sendKeys(email);
-    }
-
-    /**
-     * Enters the password according to input string.
-     *
-     * @param password - Password to be entered.
-     */
-    public void enterPassword(String password) {
-        passwordBox.click();
-        passwordBox.sendKeys(password);
+    public static LoginPage getInstance() {
+        if (loginPageInstance == null) {
+            loginPageInstance = new LoginPage();
+        }
+        return loginPageInstance;
     }
 
     /**
@@ -76,37 +68,25 @@ public class LoginPage extends BasePage {
     }
 
     /**
-     * Finds tittle on account page.
-     */
-    @FindBy(css = "h2:nth-child(1)")
-    WebElement myAccountTittle;
-
-    /**
-     * Allows to get the text on page tittle.
+     * Enters the email and password according to input string.
      *
-     * @return - Text on tittle.
+     * @param email    - Email to be entered.
+     * @param password - Password to be entered.
      */
-    public String getText() {
-        return myAccountTittle.getText();
+    public void enterCredentials(final String email, final String password) {
+        enterKeys(emailBox, email);
+        enterKeys(passwordBox, password);
     }
 
     /**
-     * Finds account drop down menu.
+     * Enters string into given web element. This will be moved to a util class.
+     *
+     * @param textBox    - TextBox to enter the keys.
+     * @param stringKeys - Keys to be entered.
      */
-    @FindBy(css = ".dropdown .hidden-xs")
-    WebElement accountDropDownMenu;
-
-    /**
-     * Finds logout option on menu.
-     */
-    @FindBy(linkText = "Logout")
-    WebElement logoutButton;
-
-    /**
-     * Allows to logout.
-     */
-    public void logout() {
-        accountDropDownMenu.click();
-        logoutButton.click();
+    public void enterKeys(final WebElement textBox, final String stringKeys) {
+        textBox.click();
+        textBox.clear();
+        textBox.sendKeys(stringKeys);
     }
 }

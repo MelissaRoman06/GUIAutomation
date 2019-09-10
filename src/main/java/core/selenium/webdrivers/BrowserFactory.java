@@ -34,7 +34,7 @@ public abstract class BrowserFactory {
      * @param browserName - Required browser.
      * @return - The instance of required browser.
      */
-    public static IBrowser getBrowser(String browserName) {
+    public static IBrowser getBrowser(final String browserName) {
         return browsers.get(browserName);
     }
 }

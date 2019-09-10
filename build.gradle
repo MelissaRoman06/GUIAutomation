@@ -1,7 +1,5 @@
 plugins {
     id 'java-library'
-    id 'findbugs'
-    id 'pmd'
     id 'checkstyle'
 }
 
@@ -24,33 +22,14 @@ dependencies {
     compile group: 'io.cucumber', name: 'cucumber-testng', version: '4.7.1'
     compile group: 'net.masterthought', name: 'cucumber-reporting', version: '4.6.0'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
-    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '4.6.0'
 }
 
 checkstyle {
     toolVersion = '8.1'
 }
 
-// FindBugs configuration
-findbugs {
-    toolVersion = '3.0.1'
-}
-tasks.withType(FindBugs) {
-    reports {
-        xml.enabled = false
-        html.enabled = true
+test {
+    testLogging {
+        events 'PASSED', 'STARTED', 'FAILED', 'SKIPPED'
     }
 }
-
-// PMD Configuration
-pmd {
-    toolVersion = '5.8.1'
-}
-
-tasks.withType(Pmd) {
-    reports {
-        xml.enabled = false
-        html.enabled = true
-    }
-}
-

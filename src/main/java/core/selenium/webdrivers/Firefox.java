@@ -21,7 +21,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  * @author Melissa Román
  * @version 1.0
  */
-public class Firefox implements IBrowser{
+public class Firefox implements IBrowser {
 
     /**
      * Initializes Firefox driver.

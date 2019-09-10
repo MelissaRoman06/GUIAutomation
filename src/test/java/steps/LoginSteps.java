@@ -11,6 +11,8 @@
  */
 package steps;
 
+import ninjaStore.ui.pages.AccountPage;
+import ninjaStore.ui.pages.PageTransporter;
 import org.testng.Assert;
 import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.ui.utils.NinjaStoreConfig;
@@ -25,37 +27,32 @@ import cucumber.api.java.en.When;
  * @version 1.0
  */
 public class LoginSteps {
-    private LoginPage loginPage;
 
     /**
-     * Constructor initializes loginPage.
+     * Navigates to login page.
      */
-    public LoginSteps() {
-        loginPage = new LoginPage();
+    @Given("the user goes to login page")
+    public void theUserGoesToLoginPage() {
+        PageTransporter.getInstance().goToLoginPage();
     }
 
     /**
-     * Enters credentials read on properties file.
+     * Login reading credentials from properties file.
      */
-    @Given("the user enters his email and password")
-    public void theUserEntersHisEmailAndPassword() {
-        loginPage.enterEmail(NinjaStoreConfig.getInstance().getEmail());
-        loginPage.enterPassword(NinjaStoreConfig.getInstance().getPassword());
+    @When("the user login entering his email and password")
+    public void theUserLoginEnteringHisEmailAndPassword() {
+        LoginPage.getInstance().enterCredentials(NinjaStoreConfig.getInstance().getEmail(),
+                NinjaStoreConfig.getInstance().getPassword());
+        LoginPage.getInstance().pressLoginButton();
     }
 
     /**
-     * Presses login button.
+     * Verifies the text in first title on account text.
+     *
+     * @param title - Expected title.
      */
-    @When("the user presses login button")
-    public void theUserPressesLoginButton() {
-        loginPage.pressLoginButton();
-    }
-
-    /**
-     * Verifies the successful login.
-     */
-    @Then("successful login")
-    public void userLoginSuccessfully() {
-        Assert.assertEquals(loginPage.getText(), "My Account", "Not successful login");
+    @Then("{string} tittle is shown")
+    public void tittleIsShown(final String title) {
+        Assert.assertEquals(AccountPage.getInstance().getTextFirstTitle(), title, "Not successful login");
     }
 }

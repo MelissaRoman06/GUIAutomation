@@ -1,5 +1,12 @@
 Feature: Login The Ninja Store
-  Scenario: Login The Ninja Store to an existing account
-    Given the user enters his email and password
-    When the user presses login button
-    Then successful login
+  @Login
+  Scenario: Login The Ninja Store page with an existing account
+    Given the user goes to login page
+    When the user login entering his email and password
+    Then "My Account" tittle is shown
+
+  @Login
+  Scenario: Login The Ninja Store page with an existing account
+    Given the user goes to login page
+    When the user login entering his email and password
+    Then "My Account" tittle is shown
