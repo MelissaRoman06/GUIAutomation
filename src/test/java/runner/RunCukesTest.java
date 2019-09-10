@@ -11,9 +11,9 @@
  */
 package runner;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
-import ninjaStore.report.ReportGenerator;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
+import ninjaStore.utils.ReportGenerator;
 import ninjaStore.ui.pages.PageTransporter;
 import org.testng.annotations.AfterTest;
 
@@ -34,7 +34,7 @@ import org.testng.annotations.AfterTest;
 public class RunCukesTest extends AbstractTestNGCucumberTests {
 
     /**
-     * Generates de report after the test execution. Also quits from the browser.
+     * Generates de utils after the test execution. Also quits from the browser.
      */
     @AfterTest
     public void afterExecution() {

@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Jala Foundation.
  */
-package ninjaStore.report;
+package ninjaStore.utils;
 
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ReportGenerator class is in charge of generate the test report.
+ * ReportGenerator class is in charge of generate the test utils.
  *
  * @author Melissa Román
  * @version 1.0
@@ -28,7 +28,7 @@ import java.util.List;
 public abstract class ReportGenerator {
 
     /**
-     * Sets up and creates the test report.
+     * Sets up and creates the test utils.
      */
     public static void generateReport() {
         final File reportOutputDirectory = new File("target");
@@ -41,6 +41,6 @@ public abstract class ReportGenerator {
         configuration.addClassifications("Branch", "RELEASE/1.0");
         final ReportBuilder reportBuilder = new ReportBuilder(jsonFiles, configuration);
         final Reportable result = reportBuilder.generateReports();
-        // and here validate 'result' to decide what to do if report has failed
+        // and here validate 'result' to decide what to do if utils has failed
     }
 }

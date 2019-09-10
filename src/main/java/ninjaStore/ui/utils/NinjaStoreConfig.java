@@ -11,6 +11,8 @@
  */
 package ninjaStore.ui.utils;
 
+import ninjaStore.utils.EventLogger;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,6 +63,7 @@ public class NinjaStoreConfig {
             password = properties.getProperty("password");
         } catch (IOException ex) {
             ex.printStackTrace();
+            EventLogger.error("Data for URL and account couldn't be retrieved from properties file", ex);
         }
     }
 

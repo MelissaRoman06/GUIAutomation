@@ -11,6 +11,8 @@
  */
 package core.selenium;
 
+import ninjaStore.utils.EventLogger;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,6 +63,7 @@ public final class WebDriverConfig {
             waitSleepTime = Integer.parseInt(properties.getProperty("waitSleepTime"));
         } catch (IOException ex) {
             ex.printStackTrace();
+            EventLogger.error("Settings for web driver couldn't be retrieved from properties file", ex);
         }
     }
 

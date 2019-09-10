@@ -1,7 +1,5 @@
 plugins {
     id 'java-library'
-    id 'findbugs'
-    id 'pmd'
     id 'checkstyle'
 }
 
@@ -28,29 +26,6 @@ dependencies {
 
 checkstyle {
     toolVersion = '8.1'
-}
-
-// FindBugs configuration
-findbugs {
-    toolVersion = '3.0.1'
-}
-tasks.withType(FindBugs) {
-    reports {
-        xml.enabled = false
-        html.enabled = true
-    }
-}
-
-// PMD Configuration
-pmd {
-    toolVersion = '5.8.1'
-}
-
-tasks.withType(Pmd) {
-    reports {
-        xml.enabled = false
-        html.enabled = true
-    }
 }
 
 test {

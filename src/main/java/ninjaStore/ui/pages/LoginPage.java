@@ -73,12 +73,18 @@ public final class LoginPage extends BasePage {
      * @param email    - Email to be entered.
      * @param password - Password to be entered.
      */
-    public void enterCredentials(String email, String password) {
+    public void enterCredentials(final String email, final String password) {
         enterKeys(emailBox, email);
         enterKeys(passwordBox, password);
     }
 
-    public void enterKeys(WebElement textBox, String stringKeys) {
+    /**
+     * Enters string into given web element. This will be moved to a util class.
+     *
+     * @param textBox    - TextBox to enter the keys.
+     * @param stringKeys - Keys to be entered.
+     */
+    public void enterKeys(final WebElement textBox, final String stringKeys) {
         textBox.click();
         textBox.clear();
         textBox.sendKeys(stringKeys);

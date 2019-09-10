@@ -12,7 +12,6 @@
 package hooks;
 
 import cucumber.api.java.After;
-import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.ui.pages.PageTransporter;
 import org.testng.annotations.AfterClass;
 

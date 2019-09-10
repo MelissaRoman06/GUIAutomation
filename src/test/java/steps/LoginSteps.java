@@ -11,7 +11,6 @@
  */
 package steps;
 
-import cucumber.api.java.en.And;
 import ninjaStore.ui.pages.AccountPage;
 import ninjaStore.ui.pages.PageTransporter;
 import org.testng.Assert;
@@ -53,7 +52,7 @@ public class LoginSteps {
      * @param title - Expected title.
      */
     @Then("{string} tittle is shown")
-    public void tittleIsShown(String title) {
+    public void tittleIsShown(final String title) {
         Assert.assertEquals(AccountPage.getInstance().getTextFirstTitle(), title, "Not successful login");
     }
 }

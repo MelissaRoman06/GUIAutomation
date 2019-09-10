@@ -10,6 +10,3 @@ Feature: Login The Ninja Store
     Given the user goes to login page
     When the user login entering his email and password
     Then "My Account" tittle is shown
-
-
-
