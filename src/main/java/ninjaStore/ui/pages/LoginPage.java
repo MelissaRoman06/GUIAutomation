@@ -61,29 +61,26 @@ public final class LoginPage extends BasePage {
     }
 
     /**
-     * Enters the email according to input string.
-     *
-     * @param email - Email to be entered.
-     */
-    public void enterEmail(String email) {
-        emailBox.click();
-        emailBox.sendKeys(email);
-    }
-
-    /**
-     * Enters the password according to input string.
-     *
-     * @param password - Password to be entered.
-     */
-    public void enterPassword(String password) {
-        passwordBox.click();
-        passwordBox.sendKeys(password);
-    }
-
-    /**
      * Presses the login button.
      */
     public void pressLoginButton() {
         loginButton.click();
+    }
+
+    /**
+     * Enters the email and password according to input string.
+     *
+     * @param email    - Email to be entered.
+     * @param password - Password to be entered.
+     */
+    public void enterCredentials(String email, String password) {
+        enterKeys(emailBox, email);
+        enterKeys(passwordBox, password);
+    }
+
+    public void enterKeys(WebElement textBox, String stringKeys) {
+        textBox.click();
+        textBox.clear();
+        textBox.sendKeys(stringKeys);
     }
 }

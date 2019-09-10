@@ -42,8 +42,8 @@ public class LoginSteps {
      */
     @When("the user login entering his email and password")
     public void theUserLoginEnteringHisEmailAndPassword() {
-        LoginPage.getInstance().enterEmail(NinjaStoreConfig.getInstance().getEmail());
-        LoginPage.getInstance().enterPassword(NinjaStoreConfig.getInstance().getPassword());
+        LoginPage.getInstance().enterCredentials(NinjaStoreConfig.getInstance().getEmail(),
+                NinjaStoreConfig.getInstance().getPassword());
         LoginPage.getInstance().pressLoginButton();
     }
 

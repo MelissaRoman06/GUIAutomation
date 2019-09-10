@@ -11,11 +11,35 @@
  */
 package runner;
 
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+import ninjaStore.report.ReportGenerator;
+import ninjaStore.ui.pages.PageTransporter;
+import org.testng.annotations.AfterTest;
+
 /**
  * RunCukesTest class.
  *
  * @author Melissa Román
  * @version 1.0
  */
-public class RunCukesTest {
+@CucumberOptions(
+        plugin = {"pretty",
+                "html:target/cucumber-pretty",
+                "json:target/cucumber.json",
+                "rerun:target/rerun.txt"},
+        glue = {"steps", "hooks"},
+        features = {"src/test/resources/features/"},
+        monochrome = true)
+public class RunCukesTest extends AbstractTestNGCucumberTests {
+
+    /**
+     * Generates de report after the test execution. Also quits from the browser.
+     */
+    @AfterTest
+    public void afterExecution() {
+        ReportGenerator.generateReport();
+        PageTransporter.getInstance().quit();
+    }
 }
+
