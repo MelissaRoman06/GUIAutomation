@@ -63,10 +63,17 @@ public final class PageTransporter extends BasePage {
     }
 
     /**
-     * Navigates to login page.
+     * Navigates to home page.
      */
     public void goToHomePage() {
         this.driver.get(NinjaStoreConfig.getInstance().getHomeURL());
+    }
+
+    /**
+     * Navigates to shopping cart page.
+     */
+    public void goToShoppingCartPage() {
+        this.driver.get(NinjaStoreConfig.getInstance().getShoppingCartURL());
     }
 
     /**

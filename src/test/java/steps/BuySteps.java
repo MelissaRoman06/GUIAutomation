@@ -15,8 +15,10 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.lexer.Pa;
 import ninjaStore.ui.pages.HomePage;
 import ninjaStore.ui.pages.PageTransporter;
+import ninjaStore.ui.pages.ShoppingCartPage;
 import org.testng.Assert;
 
 /**
@@ -35,23 +37,22 @@ public class BuySteps {
         PageTransporter.getInstance().goToHomePage();
     }
 
-    @And("the user adds an available product to cart")
+    @And("the user adds MacBook product to cart")
     public void addProductToCart() {
         HomePage.getInstance().addMacBookToCart();
     }
 
-    @Then("a success message is shown")
+    @Then("a success alert is shown")
     public void assertAlertText() {
-        String expected = "Success: You have added MacBook to your shopping cart! ×";
+        String expected = "Success: You have added MacBook to your shopping cart!";
         String actual = HomePage.getInstance().getAlertMessageText();
-        Assert.assertEquals(HomePage.getInstance().getAlertMessageText(),
-                "Success: You have added MacBook to your shopping cart! ×",
-                "Alert message text doesn't match");
-
+        Assert.assertEquals(actual, expected, "Alert message text doesn't match");
     }
 
     @And("the product is shown on shopping cart page")
     public void verifyProductOnShoppingCart() {
-
+        PageTransporter.getInstance().goToShoppingCartPage();
+        String actual = ShoppingCartPage.getInstance().getFirstProductNameOnCart();
+        Assert.assertEquals(actual, "MacBook");
     }
 }

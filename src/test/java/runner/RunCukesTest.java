@@ -28,7 +28,7 @@ import org.testng.annotations.AfterTest;
                 "html:target/cucumber",
                 "json:target/cucumber.json"},
         glue = {"steps", "hooks"},
-        features = {"src/test/resources/features/buy.feature"},
+        features = {"src/test/resources/features/"},
         monochrome = true)
 public class RunCukesTest extends AbstractTestNGCucumberTests {
 

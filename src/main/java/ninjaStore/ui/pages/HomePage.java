@@ -71,7 +71,10 @@ public class HomePage extends BasePage {
     public String getAlertMessageText() {
         alertMessage = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.cssSelector(".alert")));
-        return alertMessage.getText();
+        String alertCompleteMessage = alertMessage.getText();
+        int indexOfMessageFinish = alertCompleteMessage.indexOf("\n");
+        String alertMessage = alertCompleteMessage.substring(0, indexOfMessageFinish);
+        return alertMessage;
     }
 
 }

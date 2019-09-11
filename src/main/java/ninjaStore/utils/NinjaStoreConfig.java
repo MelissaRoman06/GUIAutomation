@@ -26,9 +26,9 @@ import java.util.Properties;
  * @version 1.0
  */
 public class NinjaStoreConfig {
-    private String baseURL;
     private String loginURL;
     private String homeURL;
+    private String shoppingCartURL;
     private String email;
     private String password;
     private static NinjaStoreConfig ninjaStoreConfigInstance;
@@ -61,9 +61,9 @@ public class NinjaStoreConfig {
         try (InputStream input = new FileInputStream("ninjaStore.properties")) {
             Properties properties = new Properties();
             properties.load(input);
-            baseURL = properties.getProperty("baseURL");
             loginURL = properties.getProperty("loginURL");
             homeURL = properties.getProperty("homeURL");
+            shoppingCartURL = properties.getProperty("shoppingCartURL");
             email = properties.getProperty("email");
             password = properties.getProperty("password");
         } catch (IOException ex) {
@@ -82,12 +82,12 @@ public class NinjaStoreConfig {
     }
 
     /**
-     * Allows to get properties base URL.
+     * Allows to get properties home URL.
      *
-     * @return - Properties base URL.
+     * @return - Properties home URL.
      */
-    public String getBaseURL() {
-        return baseURL;
+    public String getHomeURL() {
+        return homeURL;
     }
 
     /**
@@ -95,8 +95,8 @@ public class NinjaStoreConfig {
      *
      * @return - Properties home URL.
      */
-    public String getHomeURL() {
-        return homeURL;
+    public String getShoppingCartURL() {
+        return shoppingCartURL;
     }
 
     /**

@@ -27,7 +27,7 @@ public class ShoppingCartPage extends BasePage {
     private WebElement tableProductNameHeader;
 
     @FindBy(css = "tbody:nth-child(2) .text-left:nth-child(2)")
-    private WebElement firstElementProductName;
+    private WebElement firstProductName;
 
     /**
      * Constructs the page transporter with driver from parent class.
@@ -46,5 +46,12 @@ public class ShoppingCartPage extends BasePage {
             shoppingCartPageInstance = new ShoppingCartPage();
         }
         return shoppingCartPageInstance;
+    }
+
+    public String getFirstProductNameOnCart() {
+        String firstProductComplete = firstProductName.getText();
+        int indexNameFinish = firstProductComplete.indexOf("\n");
+        String firstProduct = firstProductComplete.substring(0, indexNameFinish);
+        return firstProduct;
     }
 }
