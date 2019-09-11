@@ -27,6 +27,7 @@ import java.util.Properties;
 public class NinjaStoreConfig {
     private String baseURL;
     private String loginURL;
+    private String homeURL;
     private String email;
     private String password;
     private static NinjaStoreConfig ninjaStoreConfigInstance;
@@ -59,6 +60,7 @@ public class NinjaStoreConfig {
             properties.load(input);
             baseURL = properties.getProperty("baseURL");
             loginURL = properties.getProperty("loginURL");
+            homeURL = properties.getProperty("homeURL");
             email = properties.getProperty("email");
             password = properties.getProperty("password");
         } catch (IOException ex) {
@@ -83,6 +85,15 @@ public class NinjaStoreConfig {
      */
     public String getBaseURL() {
         return baseURL;
+    }
+
+    /**
+     * Allows to get properties home URL.
+     *
+     * @return - Properties home URL.
+     */
+    public String getHomeURL() {
+        return homeURL;
     }
 
     /**

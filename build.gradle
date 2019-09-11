@@ -33,3 +33,7 @@ test {
         events 'PASSED', 'STARTED', 'FAILED', 'SKIPPED'
     }
 }
+
+tasks.withType(Test) {
+    useTestNG()
+}

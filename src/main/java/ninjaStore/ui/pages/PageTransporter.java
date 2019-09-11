@@ -63,6 +63,13 @@ public final class PageTransporter extends BasePage {
     }
 
     /**
+     * Navigates to login page.
+     */
+    public void goToHomePage() {
+        this.driver.get(NinjaStoreConfig.getInstance().getHomeURL());
+    }
+
+    /**
      * Allows to logout.
      */
     public void logout() {

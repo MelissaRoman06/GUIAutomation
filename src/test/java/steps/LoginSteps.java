@@ -51,7 +51,7 @@ public class LoginSteps {
      *
      * @param title - Expected title.
      */
-    @Then("{string} tittle is shown")
+    @Then("{string} title is shown")
     public void tittleIsShown(final String title) {
         Assert.assertEquals(AccountPage.getInstance().getTextFirstTitle(), title, "Not successful login");
     }

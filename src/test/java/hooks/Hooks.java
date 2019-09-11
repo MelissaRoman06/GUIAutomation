@@ -11,9 +11,13 @@
  */
 package hooks;
 
+import core.selenium.WebDriverManager;
 import cucumber.api.java.After;
+import cucumber.api.Scenario;
 import ninjaStore.ui.pages.PageTransporter;
-import org.testng.annotations.AfterClass;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Hooks class.
@@ -22,6 +26,11 @@ import org.testng.annotations.AfterClass;
  * @version 1.0
  */
 public class Hooks {
+    private WebDriver driver;
+
+    public Hooks() {
+        driver = WebDriverManager.getInstance().getWebDriver();
+    }
 
     /**
      * Logout from the session account.
@@ -31,13 +40,11 @@ public class Hooks {
         PageTransporter.getInstance().logout();
     }
 
-    /**
-     * Quits from the browser.
-     */
-    @AfterClass
-    public void quit() {
-        PageTransporter.getInstance().quit();
+    @After
+    public void takeScreenshot(Scenario scenario){
+        if (scenario.isFailed()) {
+            final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            scenario.embed(screenshot, "image/png"); // ... and embed it in the report.
+        }
     }
-
-
 }

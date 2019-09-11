@@ -1,11 +1,12 @@
 Feature: Buy products
   Scenario: Add to cart from home page
-    Given the user goes to home page
-    When adds "MacBook" to cart
-    Then success message is shown
-    And the item "MacBook" appears on shopping cart page
+    When the user goes to home page
+    And the user adds an available product to cart
+    Then a success message is shown
+    And the product is shown on shopping cart page
 
   Scenario: Checkout from shopping cart
-    Given the user goes to shopping cart page
-    When the user presses checkout button
+    Given there is a product on shopping cart
+    When the user goes to shopping cart page
+    And the user presses checkout button
     Then billing details form is shown

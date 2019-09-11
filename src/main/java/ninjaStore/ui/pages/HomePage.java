@@ -1,0 +1,63 @@
+/*
+ * @(#) HomePage.java Copyright (c) 2019 Jala Foundation.
+ * 2643 Av. Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of
+ * Jala Foundation, ("Confidential Information").  You shall not
+ * disclose such Confidential Information and shall use it only in
+ * accordance with the terms of the license agreement you entered into
+ * with Jala Foundation.
+ */
+package ninjaStore.ui.pages;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+/**
+ * HomePage class models the used WebElements and actions for that page.
+ *
+ * @author Melissa Román
+ * @version 1.0
+ */
+public class HomePage extends BasePage {
+    private static HomePage homePageInstance;
+    JavascriptExecutor js;
+
+    @FindBy(css = ".product-layout:nth-child(1) .hidden-xs")
+    private WebElement macBookAddToCartButton;
+
+    @FindBy(className = ".alert")
+    private WebElement alertMessage;
+
+    /**
+     * Constructs the page transporter with driver from parent class.
+     */
+    private HomePage() {
+        super();
+        js = (JavascriptExecutor) driver;
+    }
+
+    /**
+     * Gets the instance of HomePage.
+     *
+     * @return homePageInstance.
+     */
+    public static HomePage getInstance() {
+        if (homePageInstance == null) {
+            homePageInstance = new HomePage();
+        }
+        return homePageInstance;
+    }
+
+    public void addMacBookToCart() {
+        js.executeScript("window.scrollTo(0,658)");
+        macBookAddToCartButton.click();
+    }
+
+    public String getAlertMessageText() {
+        return alertMessage.getText();
+    }
+
+}

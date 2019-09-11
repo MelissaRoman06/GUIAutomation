@@ -25,9 +25,8 @@ import org.testng.annotations.AfterTest;
  */
 @CucumberOptions(
         plugin = {"pretty",
-                "html:target/cucumber-pretty",
-                "json:target/cucumber.json",
-                "rerun:target/rerun.txt"},
+                "html:target/cucumber",
+                "json:target/cucumber.json"},
         glue = {"steps", "hooks"},
         features = {"src/test/resources/features/"},
         monochrome = true)
