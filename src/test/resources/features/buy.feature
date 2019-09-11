@@ -1,4 +1,6 @@
 Feature: Buy products
+
+  @AddToCart
   Scenario: Add product to cart from home page
     When the user goes to home page
     And the user adds MacBook product to cart

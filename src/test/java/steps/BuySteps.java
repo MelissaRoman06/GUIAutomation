@@ -40,11 +40,17 @@ public class BuySteps {
         homePage = new HomePage();
     }
 
+    /**
+     * Adds an available product to cart.
+     */
     @And("the user adds MacBook product to cart")
     public void addProductToCart() {
         homePage.addMacBookToCart();
     }
 
+    /**
+     * Verifies the text on alert message.
+     */
     @Then("a success alert is shown")
     public void assertAlertText() {
         String expected = "Success: You have added MacBook to your shopping cart!";
@@ -52,6 +58,9 @@ public class BuySteps {
         Assert.assertEquals(actual, expected, "Alert message text doesn't match");
     }
 
+    /**
+     * Verifies if the product is the first element on shopping cart list.
+     */
     @And("the product is shown on shopping cart page")
     public void verifyProductOnShoppingCart() {
         PageTransporter.goToShoppingCartPage();

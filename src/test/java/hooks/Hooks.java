@@ -14,8 +14,10 @@ package hooks;
 import core.selenium.WebDriverManager;
 import cucumber.api.java.After;
 import cucumber.api.Scenario;
+import cucumber.api.java.Before;
 import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.ui.pages.PageTransporter;
+import ninjaStore.utils.NinjaStoreConfig;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +30,11 @@ import org.openqa.selenium.WebDriver;
  */
 public class Hooks {
     private WebDriver driver;
+    private LoginPage loginPage;
 
+    /**
+     * Initializes getting the web driver from web driver manager.
+     */
     public Hooks() {
         driver = WebDriverManager.getInstance().getWebDriver();
     }
@@ -38,7 +44,7 @@ public class Hooks {
      */
     @After("@Login")
     public void logout() {
-        LoginPage loginPage = new LoginPage();
+        loginPage = new LoginPage();
         loginPage.logout();
     }
 
@@ -51,7 +57,19 @@ public class Hooks {
     public void takeScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
             final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            scenario.embed(screenshot, "image/png"); // ... and embed it in the report.
+            scenario.embed(screenshot, "image/png");
         }
     }
+
+    /**
+     * Log in to the user account getting the credentials from properties file.
+     */
+    @Before("@AddToCart")
+    public void loginUser() {
+        PageTransporter.goToLoginPage();
+        loginPage = new LoginPage();
+        loginPage.enterCredentials(NinjaStoreConfig.getInstance().getEmail(),
+                NinjaStoreConfig.getInstance().getPassword());
+    }
+
 }
