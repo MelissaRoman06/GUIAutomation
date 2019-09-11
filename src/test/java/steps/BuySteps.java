@@ -42,8 +42,10 @@ public class BuySteps {
 
     @Then("a success message is shown")
     public void assertAlertText() {
+        String expected = "Success: You have added MacBook to your shopping cart! ×";
+        String actual = HomePage.getInstance().getAlertMessageText();
         Assert.assertEquals(HomePage.getInstance().getAlertMessageText(),
-                "Success: You have added MacBook to your shopping cart!×",
+                "Success: You have added MacBook to your shopping cart! ×",
                 "Alert message text doesn't match");
 
     }
