@@ -9,9 +9,10 @@
  * accordance with the terms of the license agreement you entered into
  * with Jala Foundation.
  */
-package ninjaStore.ui.utils;
+package ninjaStore.utils;
 
-import ninjaStore.utils.EventLogger;
+import core.selenium.WebDriverConfig;
+import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,12 +32,14 @@ public class NinjaStoreConfig {
     private String email;
     private String password;
     private static NinjaStoreConfig ninjaStoreConfigInstance;
+    private static Logger logger;
 
     /**
      * Constructor NinjaStoreConfig.
      */
     protected NinjaStoreConfig() {
         readProperties();
+        logger = Logger.getLogger(WebDriverConfig.class.getName());
     }
 
     /**
@@ -65,7 +68,7 @@ public class NinjaStoreConfig {
             password = properties.getProperty("password");
         } catch (IOException ex) {
             ex.printStackTrace();
-            EventLogger.error("Data for URL and account couldn't be retrieved from properties file", ex);
+            logger.error("Data for URL and account couldn't be retrieved from properties file", ex);
         }
     }
 

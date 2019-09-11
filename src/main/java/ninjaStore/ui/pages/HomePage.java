@@ -23,7 +23,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class HomePage extends BasePage {
     private static HomePage homePageInstance;
-    JavascriptExecutor js;
+    private JavascriptExecutor js;
 
     @FindBy(css = ".product-layout:nth-child(1) .hidden-xs")
     private WebElement macBookAddToCartButton;
@@ -51,11 +51,19 @@ public class HomePage extends BasePage {
         return homePageInstance;
     }
 
+    /**
+     * Adds MacBook to cart.
+     */
     public void addMacBookToCart() {
         js.executeScript("window.scrollTo(0,658)");
         macBookAddToCartButton.click();
     }
 
+    /**
+     * Gets alert message text.
+     *
+     * @return - Alert message text.
+     */
     public String getAlertMessageText() {
         return alertMessage.getText();
     }

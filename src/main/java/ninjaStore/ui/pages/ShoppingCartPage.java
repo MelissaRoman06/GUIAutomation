@@ -39,7 +39,7 @@ public class ShoppingCartPage extends BasePage {
     /**
      * Gets the instance of HomePage.
      *
-     * @return homePageInstance.
+     * @return shoppingCartPageInstance.
      */
     public static ShoppingCartPage getInstance() {
         if (shoppingCartPageInstance == null) {

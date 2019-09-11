@@ -11,7 +11,7 @@
  */
 package ninjaStore.ui.pages;
 
-import ninjaStore.ui.utils.NinjaStoreConfig;
+import ninjaStore.utils.NinjaStoreConfig;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
