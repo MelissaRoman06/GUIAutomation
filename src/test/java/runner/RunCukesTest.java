@@ -11,6 +11,7 @@
  */
 package runner;
 
+import core.selenium.WebDriverManager;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import ninjaStore.utils.ReportGenerator;
@@ -38,7 +39,7 @@ public class RunCukesTest extends AbstractTestNGCucumberTests {
     @AfterTest
     public void afterExecution() {
         ReportGenerator.generateReport();
-        PageTransporter.getInstance().quit();
+        PageTransporter.quit();
     }
 }
 

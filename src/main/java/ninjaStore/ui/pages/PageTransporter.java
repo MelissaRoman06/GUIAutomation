@@ -11,9 +11,9 @@
  */
 package ninjaStore.ui.pages;
 
+import core.selenium.WebDriverManager;
 import ninjaStore.utils.NinjaStoreConfig;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.WebDriver;
 
 /**
  * PageTransporter class is in charge of navigate through pages.
@@ -21,73 +21,34 @@ import org.openqa.selenium.support.FindBy;
  * @author Melissa Román
  * @version 1.0
  */
-public final class PageTransporter extends BasePage {
-    private static PageTransporter pageTransporterInstance;
-
-    /**
-     * Constructs the page transporter with driver from parent class.
-     */
-    private PageTransporter() {
-        super();
-    }
-
-    /**
-     * Gets the instance of PageTransporter.
-     *
-     * @return PageTransporterInstance.
-     */
-    public static PageTransporter getInstance() {
-        if (pageTransporterInstance == null) {
-            pageTransporterInstance = new PageTransporter();
-        }
-        return pageTransporterInstance;
-    }
-
-    /**
-     * Finds account drop down menu.
-     */
-    @FindBy(css = ".dropdown .hidden-xs")
-    private WebElement accountDropDownMenu;
-
-    /**
-     * Finds logout option on menu.
-     */
-    @FindBy(linkText = "Logout")
-    private WebElement logoutButton;
+public abstract class PageTransporter {
+    private final static WebDriver WEB_DRIVER = WebDriverManager.getInstance().getWebDriver();
 
     /**
      * Navigates to login page.
      */
-    public void goToLoginPage() {
-        this.driver.get(NinjaStoreConfig.getInstance().getLoginURL());
+    public static void goToLoginPage() {
+        WEB_DRIVER.get(NinjaStoreConfig.getInstance().getLoginURL());
     }
 
     /**
      * Navigates to home page.
      */
-    public void goToHomePage() {
-        this.driver.get(NinjaStoreConfig.getInstance().getHomeURL());
+    public static void goToHomePage() {
+        WEB_DRIVER.get(NinjaStoreConfig.getInstance().getHomeURL());
     }
 
     /**
      * Navigates to shopping cart page.
      */
-    public void goToShoppingCartPage() {
-        this.driver.get(NinjaStoreConfig.getInstance().getShoppingCartURL());
-    }
-
-    /**
-     * Allows to logout.
-     */
-    public void logout() {
-        accountDropDownMenu.click();
-        logoutButton.click();
+    public static void goToShoppingCartPage() {
+        WEB_DRIVER.get(NinjaStoreConfig.getInstance().getShoppingCartURL());
     }
 
     /**
      * Quits from the browser.
      */
-    public void quit() {
-        this.driver.quit();
+    public static void quit() {
+        WEB_DRIVER.quit();
     }
 }

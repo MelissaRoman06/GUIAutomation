@@ -21,35 +21,26 @@ import org.openqa.selenium.support.FindBy;
  * @version 1.0
  */
 public class ShoppingCartPage extends BasePage {
-    private static ShoppingCartPage shoppingCartPageInstance;
 
+    /**
+     * Table with a list of all products in shopping cart.
+     */
     @FindBy(css = "thead .text-left:nth-child(2)")
     private WebElement tableProductNameHeader;
 
+    /**
+     * First element on shopping cart list.
+     */
     @FindBy(css = "tbody:nth-child(2) .text-left:nth-child(2)")
-    private WebElement firstProductName;
+    private WebElement firstProductOnList;
 
     /**
-     * Constructs the page transporter with driver from parent class.
-     */
-    private ShoppingCartPage() {
-        super();
-    }
-
-    /**
-     * Gets the instance of HomePage.
+     * Gets the first element name on shopping cart list.
      *
-     * @return shoppingCartPageInstance.
+     * @return - First element name.
      */
-    public static ShoppingCartPage getInstance() {
-        if (shoppingCartPageInstance == null) {
-            shoppingCartPageInstance = new ShoppingCartPage();
-        }
-        return shoppingCartPageInstance;
-    }
-
     public String getFirstProductNameOnCart() {
-        String firstProductComplete = firstProductName.getText();
+        String firstProductComplete = firstProductOnList.getText();
         int indexNameFinish = firstProductComplete.indexOf("\n");
         String firstProduct = firstProductComplete.substring(0, indexNameFinish);
         return firstProduct;

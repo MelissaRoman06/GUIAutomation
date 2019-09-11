@@ -14,6 +14,7 @@ package hooks;
 import core.selenium.WebDriverManager;
 import cucumber.api.java.After;
 import cucumber.api.Scenario;
+import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.ui.pages.PageTransporter;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -37,11 +38,17 @@ public class Hooks {
      */
     @After("@Login")
     public void logout() {
-        PageTransporter.getInstance().logout();
+        LoginPage loginPage = new LoginPage();
+        loginPage.logout();
     }
 
+    /**
+     * Takes screenshot after the scenario if it has failed.
+     *
+     * @param scenario - Scenario to test.
+     */
     @After
-    public void takeScreenshot(Scenario scenario){
+    public void takeScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
             final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot, "image/png"); // ... and embed it in the report.

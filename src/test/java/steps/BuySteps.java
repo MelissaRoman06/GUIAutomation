@@ -28,31 +28,35 @@ import org.testng.Assert;
  * @version 1.0
  */
 public class BuySteps {
+    private HomePage homePage;
+    private ShoppingCartPage shoppingCartPage;
 
     /**
      * Navigates to home page.
      */
     @When("the user goes to home page")
     public void theUserGoesToLoginPage() {
-        PageTransporter.getInstance().goToHomePage();
+        PageTransporter.goToHomePage();
+        homePage = new HomePage();
     }
 
     @And("the user adds MacBook product to cart")
     public void addProductToCart() {
-        HomePage.getInstance().addMacBookToCart();
+        homePage.addMacBookToCart();
     }
 
     @Then("a success alert is shown")
     public void assertAlertText() {
         String expected = "Success: You have added MacBook to your shopping cart!";
-        String actual = HomePage.getInstance().getAlertMessageText();
+        String actual = homePage.getAlertMessageText();
         Assert.assertEquals(actual, expected, "Alert message text doesn't match");
     }
 
     @And("the product is shown on shopping cart page")
     public void verifyProductOnShoppingCart() {
-        PageTransporter.getInstance().goToShoppingCartPage();
-        String actual = ShoppingCartPage.getInstance().getFirstProductNameOnCart();
+        PageTransporter.goToShoppingCartPage();
+        shoppingCartPage = new ShoppingCartPage();
+        String actual = shoppingCartPage.getFirstProductNameOnCart();
         Assert.assertEquals(actual, "MacBook");
     }
 }

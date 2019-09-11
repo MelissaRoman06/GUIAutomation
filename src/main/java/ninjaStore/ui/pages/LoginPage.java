@@ -20,8 +20,7 @@ import org.openqa.selenium.support.FindBy;
  * @author Melissa Román
  * @version 1.0
  */
-public final class LoginPage extends BasePage {
-    private static LoginPage loginPageInstance;
+public class LoginPage extends BasePage {
 
     /**
      * Finds the email box.
@@ -42,23 +41,16 @@ public final class LoginPage extends BasePage {
     private WebElement loginButton;
 
     /**
-     * Constructs the page and getting the page by url.
+     * Finds account drop down menu.
      */
-    private LoginPage() {
-        super();
-    }
+    @FindBy(css = ".dropdown .hidden-xs")
+    private static WebElement accountDropDownMenu;
 
     /**
-     * Gets the instance of LoginPage.
-     *
-     * @return configInstance.
+     * Finds logout option on menu.
      */
-    public static LoginPage getInstance() {
-        if (loginPageInstance == null) {
-            loginPageInstance = new LoginPage();
-        }
-        return loginPageInstance;
-    }
+    @FindBy(linkText = "Logout")
+    private static WebElement logoutButton;
 
     /**
      * Presses the login button.
@@ -89,4 +81,13 @@ public final class LoginPage extends BasePage {
         textBox.clear();
         textBox.sendKeys(stringKeys);
     }
+
+    /**
+     * Allows to logout.
+     */
+    public void logout() {
+        accountDropDownMenu.click();
+        logoutButton.click();
+    }
+
 }
