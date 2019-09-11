@@ -15,7 +15,7 @@ import ninjaStore.ui.pages.AccountPage;
 import ninjaStore.ui.pages.PageTransporter;
 import org.testng.Assert;
 import ninjaStore.ui.pages.LoginPage;
-import ninjaStore.ui.utils.NinjaStoreConfig;
+import ninjaStore.utils.NinjaStoreConfig;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -27,13 +27,16 @@ import cucumber.api.java.en.When;
  * @version 1.0
  */
 public class LoginSteps {
+    private LoginPage loginPage;
+    private AccountPage accountPage;
 
     /**
      * Navigates to login page.
      */
     @Given("the user goes to login page")
     public void theUserGoesToLoginPage() {
-        PageTransporter.getInstance().goToLoginPage();
+        PageTransporter.goToLoginPage();
+        loginPage = new LoginPage();
     }
 
     /**
@@ -41,9 +44,9 @@ public class LoginSteps {
      */
     @When("the user login entering his email and password")
     public void theUserLoginEnteringHisEmailAndPassword() {
-        LoginPage.getInstance().enterCredentials(NinjaStoreConfig.getInstance().getEmail(),
+        loginPage.enterCredentials(NinjaStoreConfig.getInstance().getEmail(),
                 NinjaStoreConfig.getInstance().getPassword());
-        LoginPage.getInstance().pressLoginButton();
+        loginPage.pressLoginButton();
     }
 
     /**
@@ -51,8 +54,9 @@ public class LoginSteps {
      *
      * @param title - Expected title.
      */
-    @Then("{string} tittle is shown")
+    @Then("{string} title is shown")
     public void tittleIsShown(final String title) {
-        Assert.assertEquals(AccountPage.getInstance().getTextFirstTitle(), title, "Not successful login");
+        accountPage = new AccountPage();
+        Assert.assertEquals(accountPage.getTextFirstTitle(), title, "Not successful login");
     }
 }

@@ -11,6 +11,7 @@
  */
 package runner;
 
+import core.selenium.WebDriverManager;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import ninjaStore.utils.ReportGenerator;
@@ -25,9 +26,8 @@ import org.testng.annotations.AfterTest;
  */
 @CucumberOptions(
         plugin = {"pretty",
-                "html:target/cucumber-pretty",
-                "json:target/cucumber.json",
-                "rerun:target/rerun.txt"},
+                "html:target/cucumber",
+                "json:target/cucumber.json"},
         glue = {"steps", "hooks"},
         features = {"src/test/resources/features/"},
         monochrome = true)
@@ -39,7 +39,7 @@ public class RunCukesTest extends AbstractTestNGCucumberTests {
     @AfterTest
     public void afterExecution() {
         ReportGenerator.generateReport();
-        PageTransporter.getInstance().quit();
+        PageTransporter.quit();
     }
 }
 

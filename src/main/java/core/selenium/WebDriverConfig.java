@@ -11,7 +11,7 @@
  */
 package core.selenium;
 
-import ninjaStore.utils.EventLogger;
+import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,12 +30,14 @@ public final class WebDriverConfig {
     private int waitSleepTime;
     private String browserName;
     private static WebDriverConfig configInstance;
+    private static Logger logger;
 
     /**
      * Constructor WebDriverConfig.
      */
     private WebDriverConfig() {
         readProperties();
+        logger = Logger.getLogger(WebDriverConfig.class);
     }
 
     /**
@@ -63,7 +65,7 @@ public final class WebDriverConfig {
             waitSleepTime = Integer.parseInt(properties.getProperty("waitSleepTime"));
         } catch (IOException ex) {
             ex.printStackTrace();
-            EventLogger.error("Settings for web driver couldn't be retrieved from properties file", ex);
+            logger.error("Settings for web driver couldn't be retrieved from properties file", ex);
         }
     }
 

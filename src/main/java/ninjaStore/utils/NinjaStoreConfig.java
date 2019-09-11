@@ -9,9 +9,10 @@
  * accordance with the terms of the license agreement you entered into
  * with Jala Foundation.
  */
-package ninjaStore.ui.utils;
+package ninjaStore.utils;
 
-import ninjaStore.utils.EventLogger;
+import core.selenium.WebDriverConfig;
+import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,17 +26,20 @@ import java.util.Properties;
  * @version 1.0
  */
 public class NinjaStoreConfig {
-    private String baseURL;
     private String loginURL;
+    private String homeURL;
+    private String shoppingCartURL;
     private String email;
     private String password;
     private static NinjaStoreConfig ninjaStoreConfigInstance;
+    private static Logger logger;
 
     /**
      * Constructor NinjaStoreConfig.
      */
     protected NinjaStoreConfig() {
         readProperties();
+        logger = Logger.getLogger(WebDriverConfig.class.getName());
     }
 
     /**
@@ -57,13 +61,14 @@ public class NinjaStoreConfig {
         try (InputStream input = new FileInputStream("ninjaStore.properties")) {
             Properties properties = new Properties();
             properties.load(input);
-            baseURL = properties.getProperty("baseURL");
             loginURL = properties.getProperty("loginURL");
+            homeURL = properties.getProperty("homeURL");
+            shoppingCartURL = properties.getProperty("shoppingCartURL");
             email = properties.getProperty("email");
             password = properties.getProperty("password");
         } catch (IOException ex) {
             ex.printStackTrace();
-            EventLogger.error("Data for URL and account couldn't be retrieved from properties file", ex);
+            logger.error("Data for URL and account couldn't be retrieved from properties file", ex);
         }
     }
 
@@ -77,12 +82,21 @@ public class NinjaStoreConfig {
     }
 
     /**
-     * Allows to get properties base URL.
+     * Allows to get properties home URL.
      *
-     * @return - Properties base URL.
+     * @return - Properties home URL.
      */
-    public String getBaseURL() {
-        return baseURL;
+    public String getHomeURL() {
+        return homeURL;
+    }
+
+    /**
+     * Allows to get properties home URL.
+     *
+     * @return - Properties home URL.
+     */
+    public String getShoppingCartURL() {
+        return shoppingCartURL;
     }
 
     /**
