@@ -13,9 +13,9 @@ package steps;
 
 import ninjaStore.ui.pages.AccountPage;
 import ninjaStore.ui.pages.PageTransporter;
+import ninjaStore.utils.CredentialsReader;
 import org.testng.Assert;
 import ninjaStore.ui.pages.LoginPage;
-import ninjaStore.utils.NinjaStoreConfig;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -35,7 +35,7 @@ public class LoginSteps {
      */
     @Given("the user goes to login page")
     public void theUserGoesToLoginPage() {
-        PageTransporter.goToLoginPage();
+        PageTransporter.goToPage("login");
         loginPage = new LoginPage();
     }
 
@@ -44,8 +44,8 @@ public class LoginSteps {
      */
     @When("the user login entering his email and password")
     public void theUserLoginEnteringHisEmailAndPassword() {
-        loginPage.enterCredentials(NinjaStoreConfig.getInstance().getEmail(),
-                NinjaStoreConfig.getInstance().getPassword());
+        loginPage.enterCredentials(CredentialsReader.getInstance().getCredentials("email"),
+                CredentialsReader.getInstance().getCredentials("password"));
         loginPage.pressLoginButton();
     }
 
@@ -55,8 +55,8 @@ public class LoginSteps {
      * @param title - Expected title.
      */
     @Then("{string} title is shown")
-    public void tittleIsShown(final String title) {
+    public void verifySubtitle(final String title) {
         accountPage = new AccountPage();
-        Assert.assertEquals(accountPage.getTextFirstTitle(), title, "Not successful login");
+        Assert.assertEquals(accountPage.getTextFirstTitle(), title, "Subtitle text does not match");
     }
 }

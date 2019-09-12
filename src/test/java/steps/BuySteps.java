@@ -36,7 +36,7 @@ public class BuySteps {
      */
     @When("the user goes to home page")
     public void theUserGoesToLoginPage() {
-        PageTransporter.goToHomePage();
+        PageTransporter.goToPage("home");
         homePage = new HomePage();
     }
 
@@ -63,7 +63,7 @@ public class BuySteps {
      */
     @And("the product is shown on shopping cart page")
     public void verifyProductOnShoppingCart() {
-        PageTransporter.goToShoppingCartPage();
+        PageTransporter.goToPage("cart");
         shoppingCartPage = new ShoppingCartPage();
         String actual = shoppingCartPage.getFirstProductNameOnCart();
         Assert.assertEquals(actual, "MacBook");

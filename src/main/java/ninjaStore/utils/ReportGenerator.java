@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author Melissa Román
  * @version 1.0
-.*/
+ */
 public abstract class ReportGenerator {
 
     /**

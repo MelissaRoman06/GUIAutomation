@@ -17,7 +17,7 @@ import cucumber.api.Scenario;
 import cucumber.api.java.Before;
 import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.ui.pages.PageTransporter;
-import ninjaStore.utils.NinjaStoreConfig;
+import ninjaStore.utils.CredentialsReader;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -66,10 +66,10 @@ public class Hooks {
      */
     @Before("@AddToCart")
     public void loginUser() {
-        PageTransporter.goToLoginPage();
+        PageTransporter.goToPage("login");
         loginPage = new LoginPage();
-        loginPage.enterCredentials(NinjaStoreConfig.getInstance().getEmail(),
-                NinjaStoreConfig.getInstance().getPassword());
+        loginPage.enterCredentials(CredentialsReader.getInstance().getCredentials("email"),
+                CredentialsReader.getInstance().getCredentials("password"));
     }
 
 }

@@ -11,11 +11,9 @@
  */
 package core.selenium;
 
+import ninjaStore.utils.PropertiesReader;
 import org.apache.log4j.Logger;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -29,6 +27,7 @@ public final class WebDriverConfig {
     private int explicitWaitTime;
     private int waitSleepTime;
     private String browserName;
+    private Properties properties;
     private static WebDriverConfig configInstance;
     private static Logger logger;
 
@@ -36,6 +35,7 @@ public final class WebDriverConfig {
      * Constructor WebDriverConfig.
      */
     private WebDriverConfig() {
+        properties = PropertiesReader.getProperties("webDriver.properties");
         readProperties();
         logger = Logger.getLogger(WebDriverConfig.class);
     }
@@ -56,17 +56,10 @@ public final class WebDriverConfig {
      * Reads properties file for Web Driver waits' config.
      */
     public void readProperties() {
-        try (InputStream input = new FileInputStream("gradle.properties")) {
-            Properties properties = new Properties();
-            properties.load(input);
-            browserName = properties.getProperty("browserName");
-            implicitWaitTime = Integer.parseInt(properties.getProperty("implicitWaitTime"));
-            explicitWaitTime = Integer.parseInt(properties.getProperty("explicitWaitTime"));
-            waitSleepTime = Integer.parseInt(properties.getProperty("waitSleepTime"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            logger.error("Settings for web driver couldn't be retrieved from properties file", ex);
-        }
+        browserName = properties.getProperty("browserName");
+        implicitWaitTime = Integer.parseInt(properties.getProperty("implicitWaitTime"));
+        explicitWaitTime = Integer.parseInt(properties.getProperty("explicitWaitTime"));
+        waitSleepTime = Integer.parseInt(properties.getProperty("waitSleepTime"));
     }
 
     /**

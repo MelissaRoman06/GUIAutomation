@@ -12,7 +12,7 @@
 package ninjaStore.ui.pages;
 
 import core.selenium.WebDriverManager;
-import ninjaStore.utils.NinjaStoreConfig;
+import ninjaStore.utils.StoreURLReader;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -25,26 +25,12 @@ public abstract class PageTransporter {
     private final static WebDriver WEB_DRIVER = WebDriverManager.getInstance().getWebDriver();
 
     /**
-     * Navigates to login page.
+     * Navigates to given page.
+     * @param page - Page which is wanted to go to.
      */
-    public static void goToLoginPage() {
-        WEB_DRIVER.get(NinjaStoreConfig.getInstance().getLoginURL());
+    public static void goToPage(final String page) {
+        WEB_DRIVER.get(StoreURLReader.getInstance().getURL(page));
     }
-
-    /**
-     * Navigates to home page.
-     */
-    public static void goToHomePage() {
-        WEB_DRIVER.get(NinjaStoreConfig.getInstance().getHomeURL());
-    }
-
-    /**
-     * Navigates to shopping cart page.
-     */
-    public static void goToShoppingCartPage() {
-        WEB_DRIVER.get(NinjaStoreConfig.getInstance().getShoppingCartURL());
-    }
-
     /**
      * Quits from the browser.
      */
