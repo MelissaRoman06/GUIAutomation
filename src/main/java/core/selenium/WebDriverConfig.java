@@ -35,7 +35,7 @@ public final class WebDriverConfig {
      * Constructor WebDriverConfig.
      */
     private WebDriverConfig() {
-        properties = PropertiesReader.getProperties("webDriver.properties");
+        properties = PropertiesReader.getProperties("we.properties");
         readProperties();
         logger = Logger.getLogger(WebDriverConfig.class);
     }
