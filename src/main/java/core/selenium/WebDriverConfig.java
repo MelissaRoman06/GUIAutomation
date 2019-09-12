@@ -12,7 +12,6 @@
 package core.selenium;
 
 import ninjaStore.utils.PropertiesReader;
-import org.apache.log4j.Logger;
 
 import java.util.Properties;
 

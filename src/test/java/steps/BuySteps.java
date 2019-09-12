@@ -70,27 +70,47 @@ public class BuySteps {
         Assert.assertEquals(actual, "MacBook");
     }
 
+    /**
+     * Navigates to cart page.
+     */
     @When("the user goes to cart page")
     public void theUserGoesToCartPage() {
         PageTransporter.goToPage("cart");
         cartPage = new CartPage();
     }
 
+    /**
+     * Checkouts from cart page by pressing the button.
+     */
     @And("the user checkouts")
     public void theUserCheckouts() {
         cartPage.checkout();
         checkoutPage = new CheckoutPage();
     }
 
-    @Then("billing details form is shown")
-    public void billingDetailsFormIsShown() {
-        Assert.assertEquals(checkoutPage.getNameLabelText(), "First Name");
+    /**
+     * Verifies if the checkout options form is shown.
+     */
+    @Then("the checkout options form is shown")
+    public void verifiesCheckoutOptionsSubtitle() {
+        Assert.assertEquals(checkoutPage.getFirstSubtitleText(), "Step 1: Checkout Options");
     }
 
+    /**
+     * Adds a MacBook to shopping cart as prerequisite.
+     */
     @Given("there is a product on shopping cart")
     public void thereIsAProductOnShoppingCart() {
         PageTransporter.goToPage("home");
         homePage = new HomePage();
         homePage.addMacBookToCart();
+    }
+
+    /**
+     * Verifies the text of empty cart label.
+     */
+    @Then("the shopping cart is empty message is shown")
+    public void theShoppingCartIsEmptyMessageIsShown() {
+        Assert.assertEquals(cartPage.getEmptyCartLabelText(), "Your shopping cart is empty!");
     }
 }

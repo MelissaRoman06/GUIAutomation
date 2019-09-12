@@ -31,13 +31,26 @@ public class CheckoutPage extends BasePage {
     @FindBy(css = ".form-group:nth-child(1) > .col-sm-2")
     private WebElement firstNameLabel;
 
+    /**
+     * First name label on billing details forms.
+     */
+    @FindBy(css = ".panel:nth-child(1) .panel-title")
+    private WebElement firstSubtitle;
+
+    /**
+     * Constructs the page with driver from parent class and the javaScript executor.
+     */
     public CheckoutPage() {
         super();
         js = (JavascriptExecutor) driver;
     }
 
-    public String getNameLabelText() {
-        return firstNameLabel.getText();
+    /**
+     * Allows to get the text from first subtitle shown.
+     *
+     * @return - Text from first subtitle.
+     */
+    public String getFirstSubtitleText() {
+        return firstSubtitle.getText();
     }
-
 }

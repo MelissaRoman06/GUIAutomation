@@ -44,12 +44,19 @@ public class CartPage extends BasePage {
     private WebElement checkoutButton;
 
     /**
+     * Empty cart label.
+     */
+    @FindBy(css = "p:nth-child(2)")
+    private WebElement emptyCartLabel;
+
+    /**
      * Constructs the page with driver from parent class and the javaScript executor.
      */
     public CartPage() {
         super();
         js = (JavascriptExecutor) driver;
     }
+
     /**
      * Gets the first element name on shopping cart list.
      *
@@ -62,8 +69,20 @@ public class CartPage extends BasePage {
         return firstProduct;
     }
 
+    /**
+     * Checkouts from cart page.
+     */
     public void checkout() {
         js.executeScript("window.scrollTo(0,658)");
         checkoutButton.click();
+    }
+
+    /**
+     * Allows to get the text from emptyCart label.
+     *
+     * @return Empty card label text.
+     */
+    public String getEmptyCartLabelText() {
+        return emptyCartLabel.getText();
     }
 }
