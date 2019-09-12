@@ -36,7 +36,7 @@ public class BuySteps {
      * Navigates to home page.
      */
     @When("the user goes to home page")
-    public void theUserGoesToLoginPage() {
+    public void goToHomePage() {
         PageTransporter.goToPage("home");
         homePage = new HomePage();
     }
@@ -74,7 +74,7 @@ public class BuySteps {
      * Navigates to cart page.
      */
     @When("the user goes to cart page")
-    public void theUserGoesToCartPage() {
+    public void goToCartPage() {
         PageTransporter.goToPage("cart");
         cartPage = new CartPage();
     }
@@ -82,8 +82,8 @@ public class BuySteps {
     /**
      * Checkouts from cart page by pressing the button.
      */
-    @And("the user checkouts")
-    public void theUserCheckouts() {
+    @When("the user checkouts")
+    public void checkout() {
         cartPage.checkout();
         checkoutPage = new CheckoutPage();
     }
@@ -100,7 +100,7 @@ public class BuySteps {
      * Adds a MacBook to shopping cart as prerequisite.
      */
     @Given("there is a product on shopping cart")
-    public void thereIsAProductOnShoppingCart() {
+    public void addProductOnShoppingCart() {
         PageTransporter.goToPage("home");
         homePage = new HomePage();
         homePage.addMacBookToCart();
@@ -110,7 +110,7 @@ public class BuySteps {
      * Verifies the text of empty cart label.
      */
     @Then("the shopping cart is empty message is shown")
-    public void theShoppingCartIsEmptyMessageIsShown() {
+    public void verifyEmptyCartLabel() {
         Assert.assertEquals(cartPage.getEmptyCartLabelText(), "Your shopping cart is empty!");
     }
 }

@@ -37,7 +37,7 @@ public abstract class PropertiesReader {
             return properties;
         } catch (IOException ioe) {
             LogManager.getInstance().getLogger().error(ioe + path + " could not be read.");
-            throw new NullPointerException(ioe + path + " could not be read.");
+            throw new RuntimeException(ioe + path + " could not be read.");
         }
     }
 }
