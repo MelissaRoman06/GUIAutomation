@@ -29,15 +29,13 @@ public final class WebDriverConfig {
     private String browserName;
     private Properties properties;
     private static WebDriverConfig configInstance;
-    private static Logger logger;
 
     /**
      * Constructor WebDriverConfig.
      */
     private WebDriverConfig() {
-        properties = PropertiesReader.getProperties("we.properties");
+        properties = PropertiesReader.getProperties("webDriver.properties");
         readProperties();
-        logger = Logger.getLogger(WebDriverConfig.class);
     }
 
     /**

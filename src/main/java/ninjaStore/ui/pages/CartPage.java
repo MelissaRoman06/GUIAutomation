@@ -1,5 +1,5 @@
 /*
- * @(#) ShoppingCartPage.java Copyright (c) 2019 Jala Foundation.
+ * @(#) CartPage.java Copyright (c) 2019 Jala Foundation.
  * 2643 Av. Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
  * All rights reserved.
  *
@@ -12,16 +12,18 @@
 package ninjaStore.ui.pages;
 
 import ninjaStore.ui.BasePage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * ShoppingCartPage class models the used WebElements and actions for that page.
+ * CartPage class models the used WebElements and actions for that page.
  *
  * @author Melissa Román
  * @version 1.0
  */
-public class ShoppingCartPage extends BasePage {
+public class CartPage extends BasePage {
+    private JavascriptExecutor js;
 
     /**
      * Table with a list of all products in shopping cart.
@@ -36,6 +38,19 @@ public class ShoppingCartPage extends BasePage {
     private WebElement firstProductOnList;
 
     /**
+     * Checkout button.
+     */
+    @FindBy(xpath = "//a[contains(text(),'Checkout')]")
+    private WebElement checkoutButton;
+
+    /**
+     * Constructs the page with driver from parent class and the javaScript executor.
+     */
+    public CartPage() {
+        super();
+        js = (JavascriptExecutor) driver;
+    }
+    /**
      * Gets the first element name on shopping cart list.
      *
      * @return - First element name.
@@ -45,5 +60,10 @@ public class ShoppingCartPage extends BasePage {
         int indexNameFinish = firstProductComplete.indexOf("\n");
         String firstProduct = firstProductComplete.substring(0, indexNameFinish);
         return firstProduct;
+    }
+
+    public void checkout() {
+        js.executeScript("window.scrollTo(0,658)");
+        checkoutButton.click();
     }
 }

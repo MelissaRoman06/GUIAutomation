@@ -34,7 +34,7 @@ public class HomePage extends BasePage {
     private WebElement alertMessage;
 
     /**
-     * Constructs the page transporter with driver from parent class.
+     * Constructs the page with driver from parent class and the javaScript executor.
      */
     public HomePage() {
         super();

@@ -15,10 +15,10 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.lexer.Pa;
+import ninjaStore.ui.pages.CartPage;
+import ninjaStore.ui.pages.CheckoutPage;
 import ninjaStore.ui.pages.HomePage;
 import ninjaStore.ui.pages.PageTransporter;
-import ninjaStore.ui.pages.ShoppingCartPage;
 import org.testng.Assert;
 
 /**
@@ -29,7 +29,8 @@ import org.testng.Assert;
  */
 public class BuySteps {
     private HomePage homePage;
-    private ShoppingCartPage shoppingCartPage;
+    private CartPage cartPage;
+    private CheckoutPage checkoutPage;
 
     /**
      * Navigates to home page.
@@ -43,7 +44,7 @@ public class BuySteps {
     /**
      * Adds an available product to cart.
      */
-    @And("the user adds MacBook product to cart")
+    @When("the user adds MacBook product to cart")
     public void addProductToCart() {
         homePage.addMacBookToCart();
     }
@@ -61,11 +62,35 @@ public class BuySteps {
     /**
      * Verifies if the product is the first element on shopping cart list.
      */
-    @And("the product is shown on shopping cart page")
+    @Then("the product is shown on cart page")
     public void verifyProductOnShoppingCart() {
         PageTransporter.goToPage("cart");
-        shoppingCartPage = new ShoppingCartPage();
-        String actual = shoppingCartPage.getFirstProductNameOnCart();
+        cartPage = new CartPage();
+        String actual = cartPage.getFirstProductNameOnCart();
         Assert.assertEquals(actual, "MacBook");
+    }
+
+    @When("the user goes to cart page")
+    public void theUserGoesToCartPage() {
+        PageTransporter.goToPage("cart");
+        cartPage = new CartPage();
+    }
+
+    @And("the user checkouts")
+    public void theUserCheckouts() {
+        cartPage.checkout();
+        checkoutPage = new CheckoutPage();
+    }
+
+    @Then("billing details form is shown")
+    public void billingDetailsFormIsShown() {
+        Assert.assertEquals(checkoutPage.getNameLabelText(), "First Name");
+    }
+
+    @Given("there is a product on shopping cart")
+    public void thereIsAProductOnShoppingCart() {
+        PageTransporter.goToPage("home");
+        homePage = new HomePage();
+        homePage.addMacBookToCart();
     }
 }
