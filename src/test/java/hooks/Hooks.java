@@ -73,14 +73,17 @@ public class Hooks {
         headerPage = new HeaderPage();
         headerPage.dropDownAccountMenu();
         try {
-            if(!"Logout".equals(headerPage.getLogoutText())) {
-                PageTransporter.goToPage("login");
+            System.out.println("intenta");
+            System.out.println(headerPage.getLoginText());
+            if("Login".equals(headerPage.getLoginText())) {
+                System.out.println("tiene que hacer login");
+                headerPage.pressLogin();
                 loginPage = new LoginPage();
                 loginPage.enterCredentials(CredentialsReader.getInstance().getCredentials("email"),
                         CredentialsReader.getInstance().getCredentials("password"));
             }
         } catch (Exception e) {
-
+            System.out.println("no necesita hacer login");
         }
 
     }

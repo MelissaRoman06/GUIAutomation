@@ -30,10 +30,16 @@ public class HeaderPage extends BasePage {
     private static WebElement accountDropDownMenu;
 
     /**
-     * Finds logout option on menu.
+     * Finds logout option on drop down menu.
      */
     @FindBy(linkText = "Logout")
     private static WebElement logoutButton;
+
+    /**
+     * Finds login option on drop down menu.
+     */
+    @FindBy(linkText = "Login")
+    private static WebElement loginButton;
 
     /**
      * Allows to logout.
@@ -57,5 +63,21 @@ public class HeaderPage extends BasePage {
      */
     public String getLogoutText() {
         return logoutButton.getText();
+    }
+
+    /**
+     * Presses login button.
+     */
+    public void pressLogin() {
+        loginButton.click();
+    }
+
+    /**
+     * Allows to get the text from login button.
+     *
+     * @return Text from login button.
+     */
+    public String getLoginText() {
+        return loginButton.getText();
     }
 }

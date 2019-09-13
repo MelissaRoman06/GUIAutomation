@@ -7,6 +7,7 @@ Feature: Buy products
     Then a success alert is shown
     And the product is shown on cart page
 
+  @CheckLogin
   Scenario: Checkout from shopping cart
     Given there is a product on shopping cart
     When the user goes to cart page
