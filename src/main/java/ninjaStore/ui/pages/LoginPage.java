@@ -91,4 +91,13 @@ public class LoginPage extends BasePage {
         logoutButton.click();
     }
 
+    /**
+     * Allows to get the text from logout button.
+     *
+     * @return Text from logout button.
+     */
+    public String getLogoutText() {
+        return logoutButton.getText();
+    }
+
 }

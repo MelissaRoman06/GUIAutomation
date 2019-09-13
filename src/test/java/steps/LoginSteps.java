@@ -11,7 +11,9 @@
  */
 package steps;
 
+import cucumber.api.java.en.And;
 import ninjaStore.ui.pages.AccountPage;
+import ninjaStore.ui.pages.EditAccountPage;
 import ninjaStore.ui.pages.PageTransporter;
 import ninjaStore.utils.CredentialsReader;
 import org.testng.Assert;
@@ -29,12 +31,13 @@ import cucumber.api.java.en.When;
 public class LoginSteps {
     private LoginPage loginPage;
     private AccountPage accountPage;
+    private EditAccountPage editAccountPage;
 
     /**
      * Navigates to login page.
      */
     @Given("the user goes to login page")
-    public void theUserGoesToLoginPage() {
+    public void goToLoginPage() {
         PageTransporter.goToPage("login");
         loginPage = new LoginPage();
     }
@@ -43,7 +46,7 @@ public class LoginSteps {
      * Login reading credentials from properties file.
      */
     @When("the user login entering his email and password")
-    public void theUserLoginEnteringHisEmailAndPassword() {
+    public void login() {
         loginPage.enterCredentials(CredentialsReader.getInstance().getCredentials("email"),
                 CredentialsReader.getInstance().getCredentials("password"));
         loginPage.pressLoginButton();
@@ -51,12 +54,23 @@ public class LoginSteps {
 
     /**
      * Verifies the text in first title on account text.
-     *
-     * @param title - Expected title.
      */
-    @Then("{string} title is shown")
-    public void verifySubtitle(final String title) {
+    @Then("My Account title is shown")
+    public void verifySubtitle() {
         accountPage = new AccountPage();
-        Assert.assertEquals(accountPage.getTextFirstTitle(), title, "Subtitle text does not match");
+        Assert.assertEquals(accountPage.getTextFirstTitle(), "My Account", "Subtitle text does not match");
+    }
+
+    @Then("logout option is on dropdown menu")
+    public void logoutOptionIsOnDropdownMenu() {
+        Assert.assertEquals(loginPage.getLogoutText(), "Logout", "There is not logout option");
+    }
+
+    @Then("the used email appears on edit page")
+    public void theUsedEmailAppearsOnEditPage() {
+        accountPage.pressEditAccount();
+        editAccountPage = new EditAccountPage();
+        Assert.assertEquals(editAccountPage.getEmailText(),
+                CredentialsReader.getInstance().getCredentials("email"));
     }
 }

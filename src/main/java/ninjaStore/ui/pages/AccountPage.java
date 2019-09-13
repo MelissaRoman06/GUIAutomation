@@ -30,11 +30,24 @@ public class AccountPage extends BasePage {
     private WebElement myAccountTitle;
 
     /**
+     * Link to go to edit account page.
+     */
+    @FindBy(linkText = "Edit Account")
+    private WebElement editAccountLink;
+
+    /**
      * Allows to get the text on page tittle.
      *
      * @return - Text on tittle.
      */
     public String getTextFirstTitle() {
         return myAccountTitle.getText();
+    }
+
+    /**
+     * Goes to edit account page.
+     */
+    public void pressEditAccount() {
+        editAccountLink.click();
     }
 }
