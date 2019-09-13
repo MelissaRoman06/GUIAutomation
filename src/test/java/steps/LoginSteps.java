@@ -12,12 +12,10 @@
 package steps;
 
 import cucumber.api.java.en.And;
-import ninjaStore.ui.pages.AccountPage;
-import ninjaStore.ui.pages.EditAccountPage;
-import ninjaStore.ui.pages.PageTransporter;
+import ninjaStore.ui.pages.*;
 import ninjaStore.utils.CredentialsReader;
+import org.apache.http.Header;
 import org.testng.Assert;
-import ninjaStore.ui.pages.LoginPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -30,6 +28,7 @@ import cucumber.api.java.en.When;
  */
 public class LoginSteps {
     private LoginPage loginPage;
+    private HeaderPage headerPage;
     private AccountPage accountPage;
     private EditAccountPage editAccountPage;
 
@@ -63,7 +62,8 @@ public class LoginSteps {
 
     @Then("logout option is on dropdown menu")
     public void logoutOptionIsOnDropdownMenu() {
-        Assert.assertEquals(loginPage.getLogoutText(), "Logout", "There is not logout option");
+        headerPage = new HeaderPage();
+        Assert.assertEquals(headerPage.getLogoutText(), "Logout", "There is not logout option");
     }
 
     @Then("the used email appears on edit page")

@@ -15,12 +15,14 @@ import core.selenium.WebDriverManager;
 import cucumber.api.java.After;
 import cucumber.api.Scenario;
 import cucumber.api.java.Before;
+import ninjaStore.ui.pages.HeaderPage;
 import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.ui.pages.PageTransporter;
 import ninjaStore.utils.CredentialsReader;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 /**
  * Hooks class.
@@ -31,6 +33,7 @@ import org.openqa.selenium.WebDriver;
 public class Hooks {
     private WebDriver driver;
     private LoginPage loginPage;
+    private HeaderPage headerPage;
 
     /**
      * Initializes getting the web driver from web driver manager.
@@ -44,8 +47,8 @@ public class Hooks {
      */
     @After("@Login")
     public void logout() {
-        loginPage = new LoginPage();
-        loginPage.logout();
+        headerPage = new HeaderPage();
+        headerPage.logout();
     }
 
     /**
@@ -64,12 +67,22 @@ public class Hooks {
     /**
      * Log in to the user account getting the credentials from properties file.
      */
-    @Before("@AddToCart")
-    public void loginUser() {
-        PageTransporter.goToPage("login");
-        loginPage = new LoginPage();
-        loginPage.enterCredentials(CredentialsReader.getInstance().getCredentials("email"),
-                CredentialsReader.getInstance().getCredentials("password"));
+    @Before("@CheckLogin")
+    public void checkLogin() {
+        PageTransporter.goToPage("home");
+        headerPage = new HeaderPage();
+        headerPage.dropDownAccountMenu();
+        try {
+            if(!"Logout".equals(headerPage.getLogoutText())) {
+                PageTransporter.goToPage("login");
+                loginPage = new LoginPage();
+                loginPage.enterCredentials(CredentialsReader.getInstance().getCredentials("email"),
+                        CredentialsReader.getInstance().getCredentials("password"));
+            }
+        } catch (Exception e) {
+
+        }
+
     }
 
 }

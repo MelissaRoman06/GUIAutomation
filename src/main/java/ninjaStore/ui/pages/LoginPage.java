@@ -42,18 +42,6 @@ public class LoginPage extends BasePage {
     private WebElement loginButton;
 
     /**
-     * Finds account drop down menu.
-     */
-    @FindBy(css = ".dropdown .hidden-xs")
-    private static WebElement accountDropDownMenu;
-
-    /**
-     * Finds logout option on menu.
-     */
-    @FindBy(linkText = "Logout")
-    private static WebElement logoutButton;
-
-    /**
      * Presses the login button.
      */
     public void pressLoginButton() {
@@ -82,22 +70,4 @@ public class LoginPage extends BasePage {
         textBox.clear();
         textBox.sendKeys(stringKeys);
     }
-
-    /**
-     * Allows to logout.
-     */
-    public void logout() {
-        accountDropDownMenu.click();
-        logoutButton.click();
-    }
-
-    /**
-     * Allows to get the text from logout button.
-     *
-     * @return Text from logout button.
-     */
-    public String getLogoutText() {
-        return logoutButton.getText();
-    }
-
 }
