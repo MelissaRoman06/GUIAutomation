@@ -31,10 +31,4 @@ public abstract class PageTransporter {
     public static void goToPage(final String page) {
         WEB_DRIVER.get(StoreURLReader.getInstance().getURL(page));
     }
-    /**
-     * Quits from the browser.
-     */
-    public static void quit() {
-        WEB_DRIVER.quit();
-    }
 }

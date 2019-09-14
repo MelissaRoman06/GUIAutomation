@@ -23,7 +23,6 @@ import org.openqa.selenium.support.FindBy;
  * @version 1.0
  */
 public class CheckoutPage extends BasePage {
-    private JavascriptExecutor js;
 
     /**
      * First name label on billing details forms.
@@ -36,14 +35,6 @@ public class CheckoutPage extends BasePage {
      */
     @FindBy(css = ".panel:nth-child(1) .panel-title")
     private WebElement firstSubtitle;
-
-    /**
-     * Constructs the page with driver from parent class and the javaScript executor.
-     */
-    public CheckoutPage() {
-        super();
-        js = (JavascriptExecutor) driver;
-    }
 
     /**
      * Allows to get the text from first subtitle shown.

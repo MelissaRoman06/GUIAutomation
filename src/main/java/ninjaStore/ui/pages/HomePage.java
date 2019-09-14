@@ -25,21 +25,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * @version 1.0
  */
 public class HomePage extends BasePage {
-    private JavascriptExecutor js;
+    By 
 
     @FindBy(css = ".product-layout:nth-child(1) .hidden-xs")
     private WebElement macBookAddToCartButton;
 
     @FindBy(css = ".alert")
     private WebElement alertMessage;
-
-    /**
-     * Constructs the page with driver from parent class and the javaScript executor.
-     */
-    public HomePage() {
-        super();
-        js = (JavascriptExecutor) driver;
-    }
 
     /**
      * Adds MacBook to cart.

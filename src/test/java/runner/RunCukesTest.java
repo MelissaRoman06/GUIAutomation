@@ -39,7 +39,7 @@ public class RunCukesTest extends AbstractTestNGCucumberTests {
     @AfterTest
     public void afterExecution() {
         ReportGenerator.generateReport();
-        PageTransporter.quit();
+        WebDriverManager.getInstance().getWebDriver().quit();
     }
 }
 

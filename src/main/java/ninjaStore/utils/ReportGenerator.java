@@ -28,7 +28,7 @@ import java.util.List;
 public abstract class ReportGenerator {
 
     /**
-     * Sets up and creates the test utils.
+     * Sets up and creates the cucumber report.
      */
     public static void generateReport() {
         final File reportOutputDirectory = new File("target");

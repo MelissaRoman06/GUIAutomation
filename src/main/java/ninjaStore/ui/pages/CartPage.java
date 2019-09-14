@@ -23,7 +23,6 @@ import org.openqa.selenium.support.FindBy;
  * @version 1.0
  */
 public class CartPage extends BasePage {
-    private JavascriptExecutor js;
 
     /**
      * Table with a list of all products in shopping cart.
@@ -48,14 +47,6 @@ public class CartPage extends BasePage {
      */
     @FindBy(css = "p:nth-child(2)")
     private WebElement emptyCartLabel;
-
-    /**
-     * Constructs the page with driver from parent class and the javaScript executor.
-     */
-    public CartPage() {
-        super();
-        js = (JavascriptExecutor) driver;
-    }
 
     /**
      * Gets the first element name on shopping cart list.
