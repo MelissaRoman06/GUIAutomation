@@ -25,13 +25,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * @version 1.0
  */
 public class HomePage extends BasePage {
-    By 
+    private By alert = By.cssSelector(".alert");
 
+    /**
+     * MacBook's add to cart button.
+     */
     @FindBy(css = ".product-layout:nth-child(1) .hidden-xs")
     private WebElement macBookAddToCartButton;
-
-    @FindBy(css = ".alert")
-    private WebElement alertMessage;
 
     /**
      * Adds MacBook to cart.
@@ -47,12 +47,12 @@ public class HomePage extends BasePage {
      * @return - Alert message text.
      */
     public String getAlertMessageText() {
-        alertMessage = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.cssSelector(".alert")));
+        WebElement alertMessage = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(alert));
         String alertCompleteMessage = alertMessage.getText();
         int indexOfMessageFinish = alertCompleteMessage.indexOf("\n");
-        String alertMessage = alertCompleteMessage.substring(0, indexOfMessageFinish);
-        return alertMessage;
+        String alertMessageText = alertCompleteMessage.substring(0, indexOfMessageFinish);
+        return alertMessageText;
     }
 
 }
