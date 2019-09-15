@@ -12,6 +12,7 @@
 package ninjaStore.ui.pages;
 
 import ninjaStore.ui.BasePage;
+import ninjaStore.utils.StringHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -50,9 +51,7 @@ public class HomePage extends BasePage {
         WebElement alertMessage = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(alert));
         String alertCompleteMessage = alertMessage.getText();
-        int indexOfMessageFinish = alertCompleteMessage.indexOf("\n");
-        String alertMessageText = alertCompleteMessage.substring(0, indexOfMessageFinish);
-        return alertMessageText;
+        return StringHelper.getUntilLineBreak(alertCompleteMessage);
     }
 
 }

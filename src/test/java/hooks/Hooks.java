@@ -18,11 +18,10 @@ import cucumber.api.java.Before;
 import ninjaStore.ui.pages.HeaderPage;
 import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.ui.pages.PageTransporter;
-import ninjaStore.utils.CredentialsReader;
+import ninjaStore.utils.NinjaStoreConfig;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 /**
  * Hooks class.
@@ -79,13 +78,11 @@ public class Hooks {
                 System.out.println("tiene que hacer login");
                 headerPage.pressLogin();
                 loginPage = new LoginPage();
-                loginPage.enterCredentials(CredentialsReader.getInstance().getCredentials("email"),
-                        CredentialsReader.getInstance().getCredentials("password"));
+                loginPage.enterCredentials(NinjaStoreConfig.getInstance().getCredentials("email"),
+                        NinjaStoreConfig.getInstance().getCredentials("password"));
             }
         } catch (Exception e) {
             System.out.println("no necesita hacer login");
         }
-
     }
-
 }

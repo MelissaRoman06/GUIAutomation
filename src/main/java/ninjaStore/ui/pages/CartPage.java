@@ -12,6 +12,7 @@
 package ninjaStore.ui.pages;
 
 import ninjaStore.ui.BasePage;
+import ninjaStore.utils.StringHelper;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,9 +56,7 @@ public class CartPage extends BasePage {
      */
     public String getFirstProductNameOnCart() {
         String firstProductComplete = firstProductOnList.getText();
-        int indexNameFinish = firstProductComplete.indexOf("\n");
-        String firstProduct = firstProductComplete.substring(0, indexNameFinish);
-        return firstProduct;
+        return StringHelper.getUntilLineBreak(firstProductComplete);
     }
 
     /**

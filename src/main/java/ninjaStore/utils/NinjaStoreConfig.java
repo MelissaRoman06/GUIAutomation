@@ -1,5 +1,5 @@
 /*
- * @(#) StoreURLConfig.java Copyright (c) 2019 Jala Foundation.
+ * @(#) StoreCredentialsConfig.java Copyright (c) 2019 Jala Foundation.
  * 2643 Av. Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
  * All rights reserved.
  *
@@ -17,32 +17,32 @@ import org.apache.log4j.Logger;
 import java.util.Properties;
 
 /**
- * StoreURLConfig class is charge of reading account credentials.
+ * StoreCredentialsConfig class is charge of reading account credentials.
  *
  * @author Melissa Román
  * @version 1.0
  */
-public class StoreURLReader {
+public class NinjaStoreConfig {
     private Properties properties;
-    private static StoreURLReader configInstance;
+    private static NinjaStoreConfig configInstance;
     private static Logger logger;
 
     /**
-     * Constructor NinjaStoreConfig.
+     * Constructor StoreCredentialsConfig.
      */
-    protected StoreURLReader() {
-        properties = PropertiesReader.getProperties("ninjaStoreURL.properties");
+    protected NinjaStoreConfig() {
+        properties = PropertiesReader.getProperties("ninjaStoreConfig.properties");
         logger = Logger.getLogger(WebDriverConfig.class.getName());
     }
 
     /**
-     * Gets the instance of StoreURLConfig.
+     * Gets the instance of StoreCredentialsConfig.
      *
      * @return configInstance.
      */
-    public static StoreURLReader getInstance() {
+    public static NinjaStoreConfig getInstance() {
         if (configInstance == null) {
-            configInstance = new StoreURLReader();
+            configInstance = new NinjaStoreConfig();
         }
         return configInstance;
     }
@@ -53,7 +53,7 @@ public class StoreURLReader {
      * @param property - Required property name.
      * @return URL.
      */
-    public String getURL(final String property) {
+    public String getCredentials(final String property) {
         return properties.getProperty(property);
     }
 }

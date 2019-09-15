@@ -11,10 +11,8 @@
  */
 package steps;
 
-import cucumber.api.java.en.And;
 import ninjaStore.ui.pages.*;
-import ninjaStore.utils.CredentialsReader;
-import org.apache.http.Header;
+import ninjaStore.utils.NinjaStoreConfig;
 import org.testng.Assert;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -46,8 +44,8 @@ public class LoginSteps {
      */
     @When("the user login entering his email and password")
     public void login() {
-        loginPage.enterCredentials(CredentialsReader.getInstance().getCredentials("email"),
-                CredentialsReader.getInstance().getCredentials("password"));
+        loginPage.enterCredentials(NinjaStoreConfig.getInstance().getCredentials("email"),
+                NinjaStoreConfig.getInstance().getCredentials("password"));
         loginPage.pressLoginButton();
     }
 
@@ -71,6 +69,6 @@ public class LoginSteps {
         accountPage.pressEditAccount();
         editAccountPage = new EditAccountPage();
         Assert.assertEquals(editAccountPage.getEmailText(),
-                CredentialsReader.getInstance().getCredentials("email"));
+                NinjaStoreConfig.getInstance().getCredentials("email"));
     }
 }
