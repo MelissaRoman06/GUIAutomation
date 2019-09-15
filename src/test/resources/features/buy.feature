@@ -14,3 +14,9 @@ Feature: Buy products
     And the user checkouts
     Then the checkout options form is shown
 
+  Scenario: Checkout from shopping cart
+    Given there is a product on shopping cart
+    When the user goes to cart page
+    And the user checkouts
+    Then the billing details form is shown
+

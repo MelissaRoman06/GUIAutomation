@@ -36,6 +36,9 @@ public class CheckoutPage extends BasePage {
     @FindBy(css = ".panel:nth-child(1) .panel-title")
     private WebElement firstSubtitle;
 
+    @FindBy(xpath = "//a[contains(.,'Step 2: Billing Details ')]")
+    private WebElement secondSubtitle;
+
     /**
      * Allows to get the text from first subtitle shown.
      *
@@ -43,5 +46,14 @@ public class CheckoutPage extends BasePage {
      */
     public String getFirstSubtitleText() {
         return firstSubtitle.getText();
+    }
+
+    /**
+     * Allows to get the text from first subtitle shown.
+     *
+     * @return - Text from first subtitle.
+     */
+    public String getSecondSubtitleText() {
+        return secondSubtitle.getText();
     }
 }

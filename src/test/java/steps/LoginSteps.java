@@ -11,6 +11,7 @@
  */
 package steps;
 
+import ninjaStore.ui.PageTransporter;
 import ninjaStore.ui.pages.*;
 import ninjaStore.utils.NinjaStoreConfig;
 import org.testng.Assert;
@@ -19,7 +20,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * LoginSteps implemented all steps to login.
+ * LoginSteps implements all steps to login.
  *
  * @author Melissa Román
  * @version 1.0
@@ -31,22 +32,13 @@ public class LoginSteps {
     private EditAccountPage editAccountPage;
 
     /**
-     * Navigates to login page.
-     */
-    @Given("the user goes to login page")
-    public void goToLoginPage() {
-        PageTransporter.goToPage("login");
-        loginPage = new LoginPage();
-    }
-
-    /**
      * Login reading credentials from properties file.
      */
     @When("the user login entering his email and password")
     public void login() {
-        loginPage.enterCredentials(NinjaStoreConfig.getInstance().getCredentials("email"),
+        loginPage = new LoginPage();
+        loginPage.login(NinjaStoreConfig.getInstance().getCredentials("email"),
                 NinjaStoreConfig.getInstance().getCredentials("password"));
-        loginPage.pressLoginButton();
     }
 
     /**

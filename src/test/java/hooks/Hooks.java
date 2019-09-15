@@ -17,7 +17,7 @@ import cucumber.api.Scenario;
 import cucumber.api.java.Before;
 import ninjaStore.ui.pages.HeaderPage;
 import ninjaStore.ui.pages.LoginPage;
-import ninjaStore.ui.pages.PageTransporter;
+import ninjaStore.ui.PageTransporter;
 import ninjaStore.utils.NinjaStoreConfig;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -64,7 +64,7 @@ public class Hooks {
     }
 
     /**
-     * Log in to the user account getting the credentials from properties file.
+     * Checks if the user is already logged in. If not, logs in.
      */
     @Before("@CheckLogin")
     public void checkLogin() {
@@ -72,17 +72,29 @@ public class Hooks {
         headerPage = new HeaderPage();
         headerPage.dropDownAccountMenu();
         try {
-            System.out.println("intenta");
-            System.out.println(headerPage.getLoginText());
             if("Login".equals(headerPage.getLoginText())) {
-                System.out.println("tiene que hacer login");
                 headerPage.pressLogin();
                 loginPage = new LoginPage();
-                loginPage.enterCredentials(NinjaStoreConfig.getInstance().getCredentials("email"),
+                loginPage.login(NinjaStoreConfig.getInstance().getCredentials("email"),
                         NinjaStoreConfig.getInstance().getCredentials("password"));
             }
         } catch (Exception e) {
-            System.out.println("no necesita hacer login");
+        }
+    }
+
+    /**
+     * Checks if the user is already logged out. If not, logs out.
+     */
+    @Before("@CheckLogout")
+    public void checkLogout() {
+        PageTransporter.goToPage("home");
+        headerPage = new HeaderPage();
+        headerPage.dropDownAccountMenu();
+        try {
+            if("Logout".equals(headerPage.getLogoutText())) {
+                headerPage.logout();
+            }
+        } catch (Exception e) {
         }
     }
 }

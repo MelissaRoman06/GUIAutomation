@@ -11,18 +11,17 @@
  */
 package steps;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import ninjaStore.ui.pages.CartPage;
 import ninjaStore.ui.pages.CheckoutPage;
 import ninjaStore.ui.pages.HomePage;
-import ninjaStore.ui.pages.PageTransporter;
+import ninjaStore.ui.PageTransporter;
 import org.testng.Assert;
 
 /**
- * BuySteps implemented all steps to buy feature.
+ * BuySteps implements all steps to buy feature.
  *
  * @author Melissa Román
  * @version 1.0
@@ -33,19 +32,11 @@ public class BuySteps {
     private CheckoutPage checkoutPage;
 
     /**
-     * Navigates to home page.
-     */
-    @When("the user goes to home page")
-    public void goToHomePage() {
-        PageTransporter.goToPage("home");
-        homePage = new HomePage();
-    }
-
-    /**
      * Adds an available product to cart.
      */
     @When("the user adds MacBook product to cart")
     public void addProductToCart() {
+        homePage = new HomePage();
         homePage.addMacBookToCart();
     }
 
@@ -71,19 +62,11 @@ public class BuySteps {
     }
 
     /**
-     * Navigates to cart page.
-     */
-    @When("the user goes to cart page")
-    public void goToCartPage() {
-        PageTransporter.goToPage("cart");
-        cartPage = new CartPage();
-    }
-
-    /**
      * Checkouts from cart page by pressing the button.
      */
     @When("the user checkouts")
     public void checkout() {
+        cartPage = new CartPage();
         cartPage.checkout();
         checkoutPage = new CheckoutPage();
     }
@@ -112,5 +95,13 @@ public class BuySteps {
     @Then("the shopping cart is empty message is shown")
     public void verifyEmptyCartLabel() {
         Assert.assertEquals(cartPage.getEmptyCartLabelText(), "Your shopping cart is empty!");
+    }
+
+    /**
+     * Verifies if the billing details form is shown.
+     */
+    @Then("the billing details form is shown")
+    public void verifiesBillingDetailsSubtitle() {
+        Assert.assertEquals(checkoutPage.getSecondSubtitleText(), "Step 2: Billing Details");
     }
 }

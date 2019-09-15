@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Jala Foundation.
  */
-package ninjaStore.ui.pages;
+package ninjaStore.ui;
 
 import core.selenium.WebDriverManager;
 import ninjaStore.utils.TransporterHelper;
