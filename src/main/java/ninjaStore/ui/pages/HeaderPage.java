@@ -73,6 +73,13 @@ public class HeaderPage extends BasePage {
     }
 
     /**
+     * Presses logout button.
+     */
+    public void pressLogout() {
+        logoutButton.click();
+    }
+
+    /**
      * Allows to get the text from login button.
      *
      * @return Text from login button.

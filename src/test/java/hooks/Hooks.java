@@ -42,15 +42,6 @@ public class Hooks {
     }
 
     /**
-     * Logout from the session account.
-     */
-    @After("@Login")
-    public void logout() {
-        headerPage = new HeaderPage();
-        headerPage.logout();
-    }
-
-    /**
      * Takes screenshot after the scenario if it has failed.
      *
      * @param scenario - Scenario to test.
@@ -88,11 +79,14 @@ public class Hooks {
     @Before("@CheckLogout")
     public void checkLogout() {
         PageTransporter.goToPage("home");
+        System.out.println("went to home");
         headerPage = new HeaderPage();
         headerPage.dropDownAccountMenu();
         try {
             if("Logout".equals(headerPage.getLogoutText())) {
-                headerPage.logout();
+                System.out.println("is logged in");
+                headerPage.pressLogout();
+                System.out.println("now logged out");
             }
         } catch (Exception e) {
         }
