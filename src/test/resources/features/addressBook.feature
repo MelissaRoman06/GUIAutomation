@@ -1,6 +1,6 @@
 Feature: Address book management
 
-  @CheckLogin
+  @CheckLogin @DeleteAddress
   Scenario: Add new address to address book
     When the user goes to add address page
     And the user adds a new address with minimum data required

@@ -56,4 +56,22 @@ public class AddressBookPage extends BasePage {
         }
         return isFound;
     }
+
+    /**
+     * Deletes given address from address book entries.
+     *
+     * @param address - Address to be deleted.
+     */
+    public void deleteAddress(final Address address) {
+        int cantRows = driver.findElements(tableXpath).size();
+        for (int index = 1; index <= cantRows; index++) {
+            String xpathByIndex = String.format("//div[@id='content']/div[1]/table/tbody/tr[%d]/td[1]", index);
+            if (driver.findElement(By.xpath(xpathByIndex)).getText().equals(address.getAddressString())) {
+                String deleteXpath = String.format("//div[@id='content']/div[1]/table/tbody/tr[%d]/td[2] "
+                        + "//a[@class='btn btn-danger']", index);
+                driver.findElement(By.xpath(deleteXpath)).click();
+                break;
+            }
+        }
+    }
 }
