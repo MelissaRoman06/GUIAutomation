@@ -12,8 +12,7 @@
 package ninjaStore.ui.pages;
 
 import ninjaStore.ui.BasePage;
-import ninjaStore.utils.StringHelper;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -24,18 +23,7 @@ import org.openqa.selenium.support.FindBy;
  * @version 1.0
  */
 public class CartPage extends BasePage {
-
-    /**
-     * Table with a list of all products in shopping cart.
-     */
-    @FindBy(css = "thead .text-left:nth-child(2)")
-    private WebElement tableProductNameHeader;
-
-    /**
-     * First element on shopping cart list.
-     */
-    @FindBy(css = "tbody:nth-child(2) .text-left:nth-child(2)")
-    private WebElement firstProductOnList;
+    private By tableXpath = By.xpath("//div[@id='content']/form/div/table/tbody/tr");
 
     /**
      * Checkout button.
@@ -46,24 +34,32 @@ public class CartPage extends BasePage {
     /**
      * Empty cart label.
      */
-    @FindBy(css = "p:nth-child(2)")
+    @FindBy(xpath = "//p[@id='content']")
     private WebElement emptyCartLabel;
 
     /**
-     * Gets the first element name on shopping cart list.
+     * Verifies if given product is in cart table.
      *
-     * @return - First element name.
+     * @param productName - Product name to find.
+     * @return - True if the product is found.
      */
-    public String getFirstProductNameOnCart() {
-        String firstProductComplete = firstProductOnList.getText();
-        return StringHelper.getUntilLineBreak(firstProductComplete);
+    public boolean isProductInCartTable(final String productName) {
+        boolean isFound = false;
+        int cantRows = driver.findElements(tableXpath).size();
+        for (int index = 1; index <= cantRows; index++) {
+            String xpathByIndex = String.format("//*[@id='content']/form/div/table/tbody/tr[%d]/td[2]/a", index);
+            if (driver.findElement(By.xpath(xpathByIndex)).getText().equals(productName)) {
+                isFound = true;
+                break;
+            }
+        }
+        return isFound;
     }
 
     /**
      * Checkouts from cart page.
      */
     public void checkout() {
-        js.executeScript("window.scrollTo(0,658)");
         checkoutButton.click();
     }
 

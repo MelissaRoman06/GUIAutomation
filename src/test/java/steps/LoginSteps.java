@@ -11,11 +11,12 @@
  */
 package steps;
 
-import ninjaStore.ui.PageTransporter;
-import ninjaStore.ui.pages.*;
+import ninjaStore.ui.pages.AccountPage;
+import ninjaStore.ui.pages.EditAccountPage;
+import ninjaStore.ui.pages.HeaderPage;
+import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.utils.NinjaStoreConfig;
 import org.testng.Assert;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -50,14 +51,20 @@ public class LoginSteps {
         Assert.assertEquals(accountPage.getTextFirstTitle(), "My Account", "Subtitle text does not match");
     }
 
+    /**
+     * Verifies if logout option is in dropdown menu. If the account is logged in, logout option should be present.
+     */
     @Then("logout option is on dropdown menu")
-    public void logoutOptionIsOnDropdownMenu() {
+    public void verifyLogoutOption() {
         headerPage = new HeaderPage();
         Assert.assertEquals(headerPage.getLogoutText(), "Logout", "There is not logout option");
     }
 
+    /**
+     * Verifies if the email that appears on edit account page belongs to the user.
+     */
     @Then("the used email appears on edit page")
-    public void theUsedEmailAppearsOnEditPage() {
+    public void verifyEmailInEditAccount() {
         accountPage.pressEditAccount();
         editAccountPage = new EditAccountPage();
         Assert.assertEquals(editAccountPage.getEmailText(),

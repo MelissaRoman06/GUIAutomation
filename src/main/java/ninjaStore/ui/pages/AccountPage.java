@@ -26,13 +26,13 @@ public class AccountPage extends BasePage {
     /**
      * Finds tittle on account page.
      */
-    @FindBy(css = "h2:nth-child(1)")
-    private WebElement myAccountTitle;
+    @FindBy(xpath = "//h2[contains(.,'My Account')]")
+    private WebElement myAccountSubtitle;
 
     /**
      * Link to go to edit account page.
      */
-    @FindBy(linkText = "Edit Account")
+    @FindBy(xpath = "//a[@href='http://tutorialsninja.com/demo/index.php?route=account/edit']")
     private WebElement editAccountLink;
 
     /**
@@ -41,7 +41,7 @@ public class AccountPage extends BasePage {
      * @return - Text on tittle.
      */
     public String getTextFirstTitle() {
-        return myAccountTitle.getText();
+        return myAccountSubtitle.getText();
     }
 
     /**

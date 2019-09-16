@@ -25,7 +25,7 @@ public abstract class StringHelper {
      * @param stringToBeCut - String from which is it required the text before line break.
      * @return - Cut string until line break.
      */
-    public static String getUntilLineBreak(String stringToBeCut) {
+    public static String getUntilLineBreak(final String stringToBeCut) {
         int indexOfMessageFinish = stringToBeCut.indexOf("\n");
         String cutString = stringToBeCut.substring(0, indexOfMessageFinish);
         return cutString;

@@ -12,7 +12,6 @@
 package ninjaStore.ui.pages;
 
 import ninjaStore.ui.BasePage;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -36,6 +35,9 @@ public class CheckoutPage extends BasePage {
     @FindBy(css = ".panel:nth-child(1) .panel-title")
     private WebElement firstSubtitle;
 
+    /**
+     * Second subtitle.
+     */
     @FindBy(xpath = "//a[contains(.,'Step 2: Billing Details ')]")
     private WebElement secondSubtitle;
 

@@ -1,5 +1,5 @@
 /*
- * @(#) Hooks.java Copyright (c) 2019 Jala Foundation.
+ * @(#) CommonHooks.java Copyright (c) 2019 Jala Foundation.
  * 2643 Av. Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
  * All rights reserved.
  *
@@ -24,12 +24,12 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Hooks class.
+ * CommonHooks class.
  *
  * @author Melissa Román
  * @version 1.0
  */
-public class Hooks {
+public class CommonHooks {
     private WebDriver driver;
     private LoginPage loginPage;
     private HeaderPage headerPage;
@@ -37,7 +37,7 @@ public class Hooks {
     /**
      * Initializes getting the web driver from web driver manager.
      */
-    public Hooks() {
+    public CommonHooks() {
         driver = WebDriverManager.getInstance().getWebDriver();
     }
 
@@ -79,14 +79,11 @@ public class Hooks {
     @Before("@CheckLogout")
     public void checkLogout() {
         PageTransporter.goToPage("home");
-        System.out.println("went to home");
         headerPage = new HeaderPage();
         headerPage.dropDownAccountMenu();
         try {
             if("Logout".equals(headerPage.getLogoutText())) {
-                System.out.println("is logged in");
                 headerPage.pressLogout();
-                System.out.println("now logged out");
             }
         } catch (Exception e) {
         }

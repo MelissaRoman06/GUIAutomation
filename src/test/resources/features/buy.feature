@@ -1,11 +1,10 @@
 Feature: Buy products
 
-  @CheckLogin
   Scenario: Add product to cart from home page
     When the user goes to home page
-    And the user adds MacBook product to cart
-    Then a success alert is shown
-    And the product is shown on cart page
+    And the user adds iPhone product to cart
+    Then an alert Success: You have added to your shopping cart! is displayed
+    Then the product is displayed on cart page
 
   @CheckLogin
   Scenario: Checkout from shopping cart

@@ -14,6 +14,7 @@ package steps;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import ninjaStore.entities.Context;
 import ninjaStore.ui.pages.CartPage;
 import ninjaStore.ui.pages.CheckoutPage;
 import ninjaStore.ui.pages.HomePage;
@@ -30,35 +31,35 @@ public class BuySteps {
     private HomePage homePage;
     private CartPage cartPage;
     private CheckoutPage checkoutPage;
+    private Context context;
 
     /**
-     * Adds an available product to cart.
+     * Initializes the class setting the context.
+     *
+     * @param context - Context to be set.
      */
-    @When("the user adds MacBook product to cart")
-    public void addProductToCart() {
+    public BuySteps(Context context) {
+        this.context = context;
+    }
+
+    /**
+     * Adds an available product offered on home page to cart.
+     */
+    @When("the user adds (.*) product to cart")
+    public void addProductToCart(String productName) {
         homePage = new HomePage();
-        homePage.addMacBookToCart();
+        context.getProduct().setProductName(productName);
+        homePage.addProductToCart(productName);
     }
 
     /**
-     * Verifies the text on alert message.
+     * Verifies if the product is in shopping cart table.
      */
-    @Then("a success alert is shown")
-    public void assertAlertText() {
-        String expected = "Success: You have added MacBook to your shopping cart!";
-        String actual = homePage.getAlertMessageText();
-        Assert.assertEquals(actual, expected, "Alert message text doesn't match");
-    }
-
-    /**
-     * Verifies if the product is the first element on shopping cart list.
-     */
-    @Then("the product is shown on cart page")
+    @Then("the product is displayed on cart page")
     public void verifyProductOnShoppingCart() {
         PageTransporter.goToPage("cart");
         cartPage = new CartPage();
-        String actual = cartPage.getFirstProductNameOnCart();
-        Assert.assertEquals(actual, "MacBook");
+        Assert.assertTrue(cartPage.isProductInCartTable(context.getProduct().getProductName()));
     }
 
     /**
@@ -103,5 +104,17 @@ public class BuySteps {
     @Then("the billing details form is shown")
     public void verifiesBillingDetailsSubtitle() {
         Assert.assertEquals(checkoutPage.getSecondSubtitleText(), "Step 2: Billing Details");
+    }
+
+    /**
+     * Verifies the text displayed on alert ignoring the name of the product.
+     *
+     * @param alertMessage - Expected alert message.
+     */
+    @Then("an alert (.*) is displayed")
+    public void verifyAlert(String alertMessage) {
+        String actual = homePage.getAlertMessageText();
+        Assert.assertEquals(actual.replaceAll(context.getProduct().getProductName() + " ", ""),
+                alertMessage);
     }
 }
