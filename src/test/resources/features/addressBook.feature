@@ -1,7 +1,7 @@
 Feature: Address book management
 
   @CheckLogin
-  Scenario: User create a curriculum with the minimum data required
+  Scenario: Add new address to address book
     When the user goes to add address page
     And the user adds a new address with minimum data required
       | First Name   | TestName       |
