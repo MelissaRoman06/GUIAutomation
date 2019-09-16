@@ -36,18 +36,24 @@ public class CheckoutPage extends BasePage {
     private WebElement firstSubtitle;
 
     /**
-     * Second subtitle.
+     * Checkout options.
+     */
+    @FindBy(xpath = "//a[contains(.,'Step 1: Checkout Options ')]")
+    private WebElement checkoutOptionsSubtitle;
+
+    /**
+     * Billing details.
      */
     @FindBy(xpath = "//a[contains(.,'Step 2: Billing Details ')]")
-    private WebElement secondSubtitle;
+    private WebElement billingDetailsSubtitle;
 
     /**
      * Allows to get the text from first subtitle shown.
      *
      * @return - Text from first subtitle.
      */
-    public String getFirstSubtitleText() {
-        return firstSubtitle.getText();
+    public String isCheckoutOptionsExpanded() {
+        return checkoutOptionsSubtitle.getAttribute("aria-expanded");
     }
 
     /**
@@ -55,7 +61,7 @@ public class CheckoutPage extends BasePage {
      *
      * @return - Text from first subtitle.
      */
-    public String getSecondSubtitleText() {
-        return secondSubtitle.getText();
+    public String isBillingDetailsExpanded() {
+        return billingDetailsSubtitle.getAttribute("aria-expanded");
     }
 }

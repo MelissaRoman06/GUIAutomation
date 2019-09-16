@@ -1,5 +1,5 @@
 /*
- * @(#) AddressBookHooks.java Copyright (c) 2019 Jala Foundation.
+ * @(#) BuyHooks.java Copyright (c) 2019 Jala Foundation.
  * 2643 Av. Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
  * All rights reserved.
  *
@@ -13,19 +13,19 @@ package hooks;
 
 import core.selenium.WebDriverManager;
 import ninjaStore.entities.Context;
-import ninjaStore.ui.pages.AddressBookPage;
+import ninjaStore.ui.pages.CartPage;
 import cucumber.api.java.After;
 import org.openqa.selenium.WebDriver;
 
 /**
- * AddressBookHooks class.
+ * BuyHooks class.
  *
  * @author Melissa Román
  * @version 1.0
  */
-public class AddressBookHooks {
+public class BuyHooks {
     private WebDriver driver;
-    private AddressBookPage addressBookPage;
+    private CartPage cartPage;
     private Context context;
 
     /**
@@ -33,17 +33,17 @@ public class AddressBookHooks {
      *
      * @param context - Context to be set.
      */
-    public AddressBookHooks(Context context) {
+    public BuyHooks(Context context) {
         driver = WebDriverManager.getInstance().getWebDriver();
         this.context = context;
     }
 
     /**
-     * Deletes context's address from address book entries.
+     * Removes context's product from cart.
      */
-    @After("@DeleteAddress")
-    public void deleteAddress() {
-        addressBookPage = new AddressBookPage();
-        addressBookPage.deleteAddress(context.getAddress());
+    @After("@DeleteFromCart")
+    public void deleteFromCart() {
+        cartPage = new CartPage();
+        cartPage.deleteFromCart(context.getProduct());
     }
 }

@@ -59,7 +59,7 @@ public class BuySteps {
     public void verifyProductOnShoppingCart() {
         PageTransporter.goToPage("cart");
         cartPage = new CartPage();
-        Assert.assertTrue(cartPage.isProductInCartTable(context.getProduct().getProductName()));
+        Assert.assertTrue(cartPage.isProductInCartTable(context.getProduct()));
     }
 
     /**
@@ -77,7 +77,7 @@ public class BuySteps {
      */
     @Then("the checkout options form is shown")
     public void verifiesCheckoutOptionsSubtitle() {
-        Assert.assertEquals(checkoutPage.getFirstSubtitleText(), "Step 1: Checkout Options");
+        Assert.assertEquals(checkoutPage.isCheckoutOptionsExpanded(), "true");
     }
 
     /**
@@ -91,19 +91,11 @@ public class BuySteps {
     }
 
     /**
-     * Verifies the text of empty cart label.
-     */
-    @Then("the shopping cart is empty message is shown")
-    public void verifyEmptyCartLabel() {
-        Assert.assertEquals(cartPage.getEmptyCartLabelText(), "Your shopping cart is empty!");
-    }
-
-    /**
      * Verifies if the billing details form is shown.
      */
     @Then("the billing details form is shown")
     public void verifiesBillingDetailsSubtitle() {
-        Assert.assertEquals(checkoutPage.getSecondSubtitleText(), "Step 2: Billing Details");
+        Assert.assertEquals(checkoutPage.isBillingDetailsExpanded(), "true");
     }
 
     /**

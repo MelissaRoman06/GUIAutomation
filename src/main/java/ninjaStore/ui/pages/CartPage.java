@@ -11,7 +11,9 @@
  */
 package ninjaStore.ui.pages;
 
+import ninjaStore.entities.Product;
 import ninjaStore.ui.BasePage;
+import ninjaStore.utils.WebDriverHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,15 +42,15 @@ public class CartPage extends BasePage {
     /**
      * Verifies if given product is in cart table.
      *
-     * @param productName - Product name to find.
+     * @param product - Product to find.
      * @return - True if the product is found.
      */
-    public boolean isProductInCartTable(final String productName) {
+    public boolean isProductInCartTable(final Product product) {
         boolean isFound = false;
         int cantRows = driver.findElements(tableXpath).size();
         for (int index = 1; index <= cantRows; index++) {
             String xpathByIndex = String.format("//*[@id='content']/form/div/table/tbody/tr[%d]/td[2]/a", index);
-            if (driver.findElement(By.xpath(xpathByIndex)).getText().equals(productName)) {
+            if (driver.findElement(By.xpath(xpathByIndex)).getText().equals(product.getProductName())) {
                 isFound = true;
                 break;
             }
@@ -70,5 +72,28 @@ public class CartPage extends BasePage {
      */
     public String getEmptyCartLabelText() {
         return emptyCartLabel.getText();
+    }
+
+    /**
+     * Removes one element of given product from cart.
+     *
+     * @param product - Product to remove.
+     */
+    public void deleteFromCart(final Product product) {
+        int cantRows = driver.findElements(tableXpath).size();
+        for (int index = 1; index <= cantRows; index++) {
+            String xpathByIndex = String.format("//*[@id='content']/form/div/table/tbody/tr[%d]/td[2]/a", index);
+            if (driver.findElement(By.xpath(xpathByIndex)).getText().equals(product.getProductName())) {
+                String deleteXpath = String.format("//*[@id='content']/form/div/table/tbody/tr[%d]/td[4]/div/input",
+                        index);
+                String qttyProduct = driver.findElement(By.xpath(deleteXpath)).getAttribute("value");
+                int updatedQtty = Integer.parseInt(qttyProduct) - 1;
+                WebDriverHelper.enterKeys(driver.findElement(By.xpath(deleteXpath)), Integer.toString(updatedQtty));
+                String buttonXpath = String.format("//*[@id='content']/form/div/table/tbody/tr[%d]/td[4]/div/span"
+                        + "/button[1]", index);
+                driver.findElement(By.xpath(buttonXpath)).click();
+                break;
+            }
+        }
     }
 }
