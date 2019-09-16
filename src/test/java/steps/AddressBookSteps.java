@@ -52,22 +52,11 @@ public class AddressBookSteps {
     }
 
     /**
-     * Verifies the text displayed on alert.
-     *
-     * @param alertMessage - Expected alert message.
-     */
-    @Then("a alert (.*) is displayed")
-    public void verifyAlert(String alertMessage) {
-        addressBookPage = new AddressBookPage();
-        String actual = addressBookPage.getAlertMessageText();
-        Assert.assertEquals(actual, alertMessage);
-    }
-
-    /**
      * Verifies if address appears on address book entries table.
      */
-    @And("the address appears on Address Book Entries table")
+    @When("the address appears on Address Book Entries table")
     public void theAddressAppearsOnAddressBookEntriesTable() {
+        addressBookPage = new AddressBookPage();
         Assert.assertTrue(addressBookPage.isAddressInTable(context.getAddress()));
     }
 }

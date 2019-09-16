@@ -27,7 +27,11 @@ public abstract class StringHelper {
      */
     public static String getUntilLineBreak(final String stringToBeCut) {
         int indexOfMessageFinish = stringToBeCut.indexOf("\n");
-        String cutString = stringToBeCut.substring(0, indexOfMessageFinish);
-        return cutString;
+        if (indexOfMessageFinish > 0) {
+            String cutString = stringToBeCut.substring(0, indexOfMessageFinish);
+            return cutString;
+        } else {
+            return stringToBeCut;
+        }
     }
 }

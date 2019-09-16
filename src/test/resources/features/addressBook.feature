@@ -11,5 +11,5 @@ Feature: Address book management
       | Post Code    | 12345          |
       | Country      | Bolivia        |
       | Region/State | Cochabamba     |
-    Then a alert Your address has been successfully added is displayed
+    Then an alert Your address has been successfully added is displayed
     And the address appears on Address Book Entries table

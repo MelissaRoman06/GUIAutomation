@@ -11,8 +11,12 @@
  */
 package steps;
 
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import ninjaStore.entities.Context;
 import ninjaStore.ui.PageTransporter;
+import ninjaStore.ui.pages.HeaderPage;
+import org.testng.Assert;
 
 /**
  * CommonSteps implemented all common steps.
@@ -21,6 +25,12 @@ import ninjaStore.ui.PageTransporter;
  * @version 1.0
  */
 public class CommonSteps {
+    private HeaderPage headerPage;
+    private Context context;
+
+    public CommonSteps(Context context) {
+        this.context = context;
+    }
 
     /**
      * Navigates to given page.
@@ -28,5 +38,18 @@ public class CommonSteps {
     @When("the user goes to (.*) page")
     public void goToPage(String pageName) {
         PageTransporter.goToPage(pageName);
+    }
+
+    /**
+     * Verifies the text displayed on alert ignoring the name of the product.
+     *
+     * @param alertMessage - Expected alert message.
+     */
+    @Then("an alert (.*) is displayed")
+    public void verifyAlert(String alertMessage) {
+        headerPage = new HeaderPage();
+        String actual = headerPage.getAlertMessageText();
+        Assert.assertEquals(actual.replaceAll(context.getProduct().getProductName() + " ", ""),
+                alertMessage);
     }
 }

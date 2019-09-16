@@ -97,16 +97,4 @@ public class BuySteps {
     public void verifiesBillingDetailsSubtitle() {
         Assert.assertEquals(checkoutPage.isBillingDetailsExpanded(), "true");
     }
-
-    /**
-     * Verifies the text displayed on alert ignoring the name of the product.
-     *
-     * @param alertMessage - Expected alert message.
-     */
-    @Then("an alert (.*) is displayed")
-    public void verifyAlert(String alertMessage) {
-        String actual = homePage.getAlertMessageText();
-        Assert.assertEquals(actual.replaceAll(context.getProduct().getProductName() + " ", ""),
-                alertMessage);
-    }
 }

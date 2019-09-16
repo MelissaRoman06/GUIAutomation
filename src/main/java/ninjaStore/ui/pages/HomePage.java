@@ -12,11 +12,9 @@
 package ninjaStore.ui.pages;
 
 import ninjaStore.ui.BasePage;
-import ninjaStore.utils.StringHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * HomePage class models the used WebElements and actions for that page.
@@ -51,17 +49,4 @@ public class HomePage extends BasePage {
         By productXpath = By.xpath(xpathAddToCart);
         driver.findElement(productXpath).click();
     }
-
-    /**
-     * Gets alert message text.
-     *
-     * @return - Alert message text.
-     */
-    public String getAlertMessageText() {
-        WebElement alertMessage = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(alert));
-        String alertCompleteMessage = alertMessage.getText();
-        return StringHelper.getUntilLineBreak(alertCompleteMessage);
-    }
-
 }
