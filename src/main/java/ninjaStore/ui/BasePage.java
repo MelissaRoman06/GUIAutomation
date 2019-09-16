@@ -9,9 +9,10 @@
  * accordance with the terms of the license agreement you entered into
  * with Jala Foundation.
  */
-package ninjaStore.ui.pages;
+package ninjaStore.ui;
 
 import core.selenium.WebDriverManager;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,13 +26,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected JavascriptExecutor js;
 
     /**
-     * Contructor to get the correct web driver instance.
+     * Constructor to get the correct web driver instance.
      */
     public BasePage() {
         this.driver = WebDriverManager.getInstance().getWebDriver();
-        PageFactory.initElements(driver, this);
         this.wait = WebDriverManager.getInstance().getWait();
+        PageFactory.initElements(driver, this);
+        js = (JavascriptExecutor) driver;
     }
 }

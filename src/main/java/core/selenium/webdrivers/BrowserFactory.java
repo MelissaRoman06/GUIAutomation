@@ -23,6 +23,9 @@ import java.util.Map;
 public abstract class BrowserFactory {
     private static Map<String, IBrowser> browsers = new HashMap<>();
 
+    /**
+     * The map has the corresponding browser to the key.
+     */
     static {
         browsers.put("chrome", new Chrome());
         browsers.put("firefox", new Firefox());

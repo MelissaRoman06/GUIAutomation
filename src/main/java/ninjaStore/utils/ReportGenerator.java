@@ -24,11 +24,11 @@ import java.util.List;
  *
  * @author Melissa Román
  * @version 1.0
-.*/
+ */
 public abstract class ReportGenerator {
 
     /**
-     * Sets up and creates the test utils.
+     * Sets up and creates the cucumber report.
      */
     public static void generateReport() {
         final File reportOutputDirectory = new File("target");

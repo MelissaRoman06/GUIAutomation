@@ -11,61 +11,90 @@
  */
 package steps;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.lexer.Pa;
+import ninjaStore.entities.Context;
+import ninjaStore.ui.pages.CartPage;
+import ninjaStore.ui.pages.CheckoutPage;
 import ninjaStore.ui.pages.HomePage;
-import ninjaStore.ui.pages.PageTransporter;
-import ninjaStore.ui.pages.ShoppingCartPage;
+import ninjaStore.ui.PageTransporter;
 import org.testng.Assert;
 
 /**
- * BuySteps implemented all steps to buy feature.
+ * BuySteps implements all steps to buy feature.
  *
  * @author Melissa Román
  * @version 1.0
  */
 public class BuySteps {
     private HomePage homePage;
-    private ShoppingCartPage shoppingCartPage;
+    private CartPage cartPage;
+    private CheckoutPage checkoutPage;
+    private Context context;
 
     /**
-     * Navigates to home page.
+     * Initializes the class setting the context.
+     *
+     * @param context - Context to be set.
      */
-    @When("the user goes to home page")
-    public void theUserGoesToLoginPage() {
-        PageTransporter.goToHomePage();
-        homePage = new HomePage();
+    public BuySteps(Context context) {
+        this.context = context;
     }
 
     /**
-     * Adds an available product to cart.
+     * Adds an available product offered on home page to cart.
      */
-    @And("the user adds MacBook product to cart")
-    public void addProductToCart() {
+    @When("the user adds (.*) product to cart")
+    public void addProductToCart(String productName) {
+        homePage = new HomePage();
+        context.getProduct().setProductName(productName);
+        homePage.addProductToCart(productName);
+    }
+
+    /**
+     * Verifies if the product is in shopping cart table.
+     */
+    @Then("the product is displayed on cart page")
+    public void verifyProductOnShoppingCart() {
+        PageTransporter.goToPage("cart");
+        cartPage = new CartPage();
+        Assert.assertTrue(cartPage.isProductInCartTable(context.getProduct()));
+    }
+
+    /**
+     * Checkouts from cart page by pressing the button.
+     */
+    @When("the user checkouts")
+    public void checkout() {
+        cartPage = new CartPage();
+        cartPage.checkout();
+        checkoutPage = new CheckoutPage();
+    }
+
+    /**
+     * Verifies if the checkout options form is shown.
+     */
+    @Then("the checkout options form is shown")
+    public void verifiesCheckoutOptionsSubtitle() {
+        Assert.assertEquals(checkoutPage.isCheckoutOptionsExpanded(), "true");
+    }
+
+    /**
+     * Adds a MacBook to shopping cart as prerequisite.
+     */
+    @Given("there is a product on shopping cart")
+    public void addProductOnShoppingCart() {
+        PageTransporter.goToPage("home");
+        homePage = new HomePage();
         homePage.addMacBookToCart();
     }
 
     /**
-     * Verifies the text on alert message.
+     * Verifies if the billing details form is shown.
      */
-    @Then("a success alert is shown")
-    public void assertAlertText() {
-        String expected = "Success: You have added MacBook to your shopping cart!";
-        String actual = homePage.getAlertMessageText();
-        Assert.assertEquals(actual, expected, "Alert message text doesn't match");
-    }
-
-    /**
-     * Verifies if the product is the first element on shopping cart list.
-     */
-    @And("the product is shown on shopping cart page")
-    public void verifyProductOnShoppingCart() {
-        PageTransporter.goToShoppingCartPage();
-        shoppingCartPage = new ShoppingCartPage();
-        String actual = shoppingCartPage.getFirstProductNameOnCart();
-        Assert.assertEquals(actual, "MacBook");
+    @Then("the billing details form is shown")
+    public void verifiesBillingDetailsSubtitle() {
+        Assert.assertEquals(checkoutPage.isBillingDetailsExpanded(), "true");
     }
 }

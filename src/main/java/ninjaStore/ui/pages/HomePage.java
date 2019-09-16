@@ -11,11 +11,10 @@
  */
 package ninjaStore.ui.pages;
 
+import ninjaStore.ui.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * HomePage class models the used WebElements and actions for that page.
@@ -24,42 +23,30 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * @version 1.0
  */
 public class HomePage extends BasePage {
-    private JavascriptExecutor js;
-
-    @FindBy(css = ".product-layout:nth-child(1) .hidden-xs")
-    private WebElement macBookAddToCartButton;
-
-    @FindBy(css = ".alert")
-    private WebElement alertMessage;
+    private By alert = By.cssSelector(".alert");
 
     /**
-     * Constructs the page transporter with driver from parent class.
+     * MacBook's add to cart button.
      */
-    public HomePage() {
-        super();
-        js = (JavascriptExecutor) driver;
-    }
+    @FindBy(xpath = "//div[@id='content']/div[2]/div[1]/div/div[3]/button[1]")
+    private WebElement macBookAddToCartButton;
 
     /**
      * Adds MacBook to cart.
      */
     public void addMacBookToCart() {
-        js.executeScript("window.scrollTo(0,658)");
         macBookAddToCartButton.click();
     }
 
     /**
-     * Gets alert message text.
+     * Adds the given product to cart. Product must be offered on home page.
      *
-     * @return - Alert message text.
+     * @param productName - Product offered on home page.
      */
-    public String getAlertMessageText() {
-        alertMessage = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.cssSelector(".alert")));
-        String alertCompleteMessage = alertMessage.getText();
-        int indexOfMessageFinish = alertCompleteMessage.indexOf("\n");
-        String alertMessage = alertCompleteMessage.substring(0, indexOfMessageFinish);
-        return alertMessage;
+    public void addProductToCart(final String productName) {
+        String xpathAddToCart = String.format("//a[contains(text(),'%s')]/ancestor::div[@class='caption']"
+                + "/following-sibling::div //i[@class='fa fa-shopping-cart']", productName);
+        By productXpath = By.xpath(xpathAddToCart);
+        driver.findElement(productXpath).click();
     }
-
 }

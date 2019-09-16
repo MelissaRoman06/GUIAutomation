@@ -11,6 +11,7 @@
  */
 package ninjaStore.ui.pages;
 
+import ninjaStore.ui.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -25,8 +26,20 @@ public class AccountPage extends BasePage {
     /**
      * Finds tittle on account page.
      */
-    @FindBy(css = "h2:nth-child(1)")
-    private WebElement myAccountTitle;
+    @FindBy(xpath = "//h2[contains(.,'My Account')]")
+    private WebElement myAccountSubtitle;
+
+    /**
+     * Link to go to edit account page.
+     */
+    @FindBy(xpath = "//a[@href='http://tutorialsninja.com/demo/index.php?route=account/edit']")
+    private WebElement editAccountLink;
+
+    /**
+     * Link to go to address book page.
+     */
+    @FindBy(xpath = "//a[@href='http://tutorialsninja.com/demo/index.php?route=account/address']")
+    private WebElement addressBookLink;
 
     /**
      * Allows to get the text on page tittle.
@@ -34,6 +47,13 @@ public class AccountPage extends BasePage {
      * @return - Text on tittle.
      */
     public String getTextFirstTitle() {
-        return myAccountTitle.getText();
+        return myAccountSubtitle.getText();
+    }
+
+    /**
+     * Goes to edit account page.
+     */
+    public void pressEditAccount() {
+        editAccountLink.click();
     }
 }

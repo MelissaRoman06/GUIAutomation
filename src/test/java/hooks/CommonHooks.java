@@ -1,5 +1,5 @@
 /*
- * @(#) Hooks.java Copyright (c) 2019 Jala Foundation.
+ * @(#) CommonHooks.java Copyright (c) 2019 Jala Foundation.
  * 2643 Av. Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
  * All rights reserved.
  *
@@ -15,37 +15,30 @@ import core.selenium.WebDriverManager;
 import cucumber.api.java.After;
 import cucumber.api.Scenario;
 import cucumber.api.java.Before;
+import ninjaStore.ui.pages.HeaderPage;
 import ninjaStore.ui.pages.LoginPage;
-import ninjaStore.ui.pages.PageTransporter;
+import ninjaStore.ui.PageTransporter;
 import ninjaStore.utils.NinjaStoreConfig;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Hooks class.
+ * CommonHooks class.
  *
  * @author Melissa Román
  * @version 1.0
  */
-public class Hooks {
+public class CommonHooks {
     private WebDriver driver;
     private LoginPage loginPage;
+    private HeaderPage headerPage;
 
     /**
      * Initializes getting the web driver from web driver manager.
      */
-    public Hooks() {
+    public CommonHooks() {
         driver = WebDriverManager.getInstance().getWebDriver();
-    }
-
-    /**
-     * Logout from the session account.
-     */
-    @After("@Login")
-    public void logout() {
-        loginPage = new LoginPage();
-        loginPage.logout();
     }
 
     /**
@@ -62,14 +55,37 @@ public class Hooks {
     }
 
     /**
-     * Log in to the user account getting the credentials from properties file.
+     * Checks if the user is already logged in. If not, logs in.
      */
-    @Before("@AddToCart")
-    public void loginUser() {
-        PageTransporter.goToLoginPage();
-        loginPage = new LoginPage();
-        loginPage.enterCredentials(NinjaStoreConfig.getInstance().getEmail(),
-                NinjaStoreConfig.getInstance().getPassword());
+    @Before("@CheckLogin")
+    public void checkLogin() {
+        PageTransporter.goToPage("home");
+        headerPage = new HeaderPage();
+        headerPage.dropDownAccountMenu();
+        try {
+            if("Login".equals(headerPage.getLoginText())) {
+                headerPage.pressLogin();
+                loginPage = new LoginPage();
+                loginPage.login(NinjaStoreConfig.getInstance().getCredentials("email"),
+                        NinjaStoreConfig.getInstance().getCredentials("password"));
+            }
+        } catch (Exception e) {
+        }
     }
 
+    /**
+     * Checks if the user is already logged out. If not, logs out.
+     */
+    @Before("@CheckLogout")
+    public void checkLogout() {
+        PageTransporter.goToPage("home");
+        headerPage = new HeaderPage();
+        headerPage.dropDownAccountMenu();
+        try {
+            if("Logout".equals(headerPage.getLogoutText())) {
+                headerPage.pressLogout();
+            }
+        } catch (Exception e) {
+        }
+    }
 }

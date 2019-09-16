@@ -11,6 +11,8 @@
  */
 package ninjaStore.ui.pages;
 
+import ninjaStore.ui.BasePage;
+import ninjaStore.utils.WebDriverHelper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -41,53 +43,14 @@ public class LoginPage extends BasePage {
     private WebElement loginButton;
 
     /**
-     * Finds account drop down menu.
-     */
-    @FindBy(css = ".dropdown .hidden-xs")
-    private static WebElement accountDropDownMenu;
-
-    /**
-     * Finds logout option on menu.
-     */
-    @FindBy(linkText = "Logout")
-    private static WebElement logoutButton;
-
-    /**
-     * Presses the login button.
-     */
-    public void pressLoginButton() {
-        loginButton.click();
-    }
-
-    /**
      * Enters the email and password according to input string.
      *
      * @param email    - Email to be entered.
      * @param password - Password to be entered.
      */
-    public void enterCredentials(final String email, final String password) {
-        enterKeys(emailBox, email);
-        enterKeys(passwordBox, password);
+    public void login(final String email, final String password) {
+        WebDriverHelper.enterKeys(emailBox, email);
+        WebDriverHelper.enterKeys(passwordBox, password);
+        loginButton.click();
     }
-
-    /**
-     * Enters string into given web element. This will be moved to a util class.
-     *
-     * @param textBox    - TextBox to enter the keys.
-     * @param stringKeys - Keys to be entered.
-     */
-    public void enterKeys(final WebElement textBox, final String stringKeys) {
-        textBox.click();
-        textBox.clear();
-        textBox.sendKeys(stringKeys);
-    }
-
-    /**
-     * Allows to logout.
-     */
-    public void logout() {
-        accountDropDownMenu.click();
-        logoutButton.click();
-    }
-
 }
