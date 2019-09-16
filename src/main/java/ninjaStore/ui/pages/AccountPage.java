@@ -36,6 +36,12 @@ public class AccountPage extends BasePage {
     private WebElement editAccountLink;
 
     /**
+     * Link to go to address book page.
+     */
+    @FindBy(xpath = "//a[@href='http://tutorialsninja.com/demo/index.php?route=account/address']")
+    private WebElement addressBookLink;
+
+    /**
      * Allows to get the text on page tittle.
      *
      * @return - Text on tittle.

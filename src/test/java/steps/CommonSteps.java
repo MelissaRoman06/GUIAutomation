@@ -26,7 +26,7 @@ public class CommonSteps {
      * Navigates to given page.
      */
     @When("the user goes to (.*) page")
-    public void goToHomePage(String pageName) {
+    public void goToPage(String pageName) {
         PageTransporter.goToPage(pageName);
     }
 }

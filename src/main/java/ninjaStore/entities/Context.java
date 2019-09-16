@@ -19,12 +19,14 @@ package ninjaStore.entities;
  */
 public class Context {
     private Product product;
+    private Address address;
 
     /**
      * Constructs all elements in the context.
      */
     public Context() {
         this.product = new Product();
+        this.address = new Address();
     }
 
     /**
@@ -34,5 +36,14 @@ public class Context {
      */
     public Product getProduct() {
         return product;
+    }
+
+    /**
+     * Allows to get context's address.
+     *
+     * @return - Address.
+     */
+    public Address getAddress() {
+        return address;
     }
 }

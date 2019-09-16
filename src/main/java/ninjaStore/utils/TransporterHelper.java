@@ -24,12 +24,14 @@ public abstract class TransporterHelper {
     private final static Map<String, String> URL_SUFFIX = new HashMap<>();
 
     /**
-     * The map has the corresponding browser to the key.
+     * The map has the corresponding URL suffix to the key.
      */
     static {
         URL_SUFFIX.put("login", "account/login");
         URL_SUFFIX.put("home", "common/home");
         URL_SUFFIX.put("cart", "checkout/cart");
+        URL_SUFFIX.put("address book", "account/address");
+        URL_SUFFIX.put("add address", "account/address/add");
     }
 
     /**
