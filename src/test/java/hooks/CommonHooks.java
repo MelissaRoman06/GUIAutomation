@@ -19,6 +19,7 @@ import ninjaStore.ui.pages.HeaderPage;
 import ninjaStore.ui.pages.LoginPage;
 import ninjaStore.ui.PageTransporter;
 import ninjaStore.utils.NinjaStoreConfig;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -69,7 +70,7 @@ public class CommonHooks {
                 loginPage.login(NinjaStoreConfig.getInstance().getCredentials("email"),
                         NinjaStoreConfig.getInstance().getCredentials("password"));
             }
-        } catch (Exception e) {
+        } catch (NoSuchElementException nse) {
         }
     }
 
@@ -85,7 +86,7 @@ public class CommonHooks {
             if ("Logout".equals(headerPage.getLogoutText())) {
                 headerPage.pressLogout();
             }
-        } catch (Exception e) {
+        } catch (NoSuchElementException nse) {
         }
     }
 }
