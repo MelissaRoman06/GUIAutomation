@@ -33,7 +33,7 @@ public class AddressBookHooks {
      *
      * @param context - Context to be set.
      */
-    public AddressBookHooks(Context context) {
+    public AddressBookHooks(final Context context) {
         driver = WebDriverManager.getInstance().getWebDriver();
         this.context = context;
     }

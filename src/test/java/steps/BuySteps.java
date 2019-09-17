@@ -38,15 +38,18 @@ public class BuySteps {
      *
      * @param context - Context to be set.
      */
-    public BuySteps(Context context) {
+    public BuySteps(final Context context) {
         this.context = context;
     }
 
     /**
-     * Adds an available product offered on home page to cart.
+     * Adds a product to cart according to given product name.
+     * Product must be offered in home page.
+     *
+     * @param productName - Product's name.
      */
     @When("the user adds (.*) product to cart")
-    public void addProductToCart(String productName) {
+    public void addProductToCart(final String productName) {
         homePage = new HomePage();
         context.getProduct().setProductName(productName);
         homePage.addProductToCart(productName);
@@ -76,7 +79,7 @@ public class BuySteps {
      * Verifies if the checkout options form is shown.
      */
     @Then("the checkout options form is shown")
-    public void verifiesCheckoutOptionsSubtitle() {
+    public void verifiesCheckoutOptionsForm() {
         Assert.assertEquals(checkoutPage.isCheckoutOptionsExpanded(), "true");
     }
 
@@ -94,7 +97,7 @@ public class BuySteps {
      * Verifies if the billing details form is shown.
      */
     @Then("the billing details form is shown")
-    public void verifiesBillingDetailsSubtitle() {
+    public void verifiesBillingDetailsForm() {
         Assert.assertEquals(checkoutPage.isBillingDetailsExpanded(), "true");
     }
 }

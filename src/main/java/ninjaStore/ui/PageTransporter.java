@@ -22,7 +22,7 @@ import org.openqa.selenium.WebDriver;
  * @version 1.0
  */
 public abstract class PageTransporter {
-    private final static WebDriver WEB_DRIVER = WebDriverManager.getInstance().getWebDriver();
+    private static final WebDriver WEB_DRIVER = WebDriverManager.getInstance().getWebDriver();
 
     /**
      * Navigates to given page.

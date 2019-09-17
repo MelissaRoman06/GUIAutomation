@@ -11,8 +11,6 @@
  */
 package steps;
 
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import ninjaStore.entities.Context;
 import ninjaStore.ui.pages.AddAddressPage;
@@ -37,15 +35,17 @@ public class AddressBookSteps {
      *
      * @param context - Context to be set.
      */
-    public AddressBookSteps(Context context) {
+    public AddressBookSteps(final Context context) {
         this.context = context;
     }
 
     /**
-     * Adds an available product offered on home page to cart.
+     * Adds a new address accordint to given data in a map.
+     *
+     * @param inputFields - Data to fill the add address form.
      */
     @When("the user adds a new address with minimum data required")
-    public void addProductToCart(Map<String, String> inputFields) {
+    public void addAddress(final Map<String, String> inputFields) {
         addAddressPage = new AddAddressPage();
         context.getAddress().setAddress(inputFields);
         addAddressPage.fillForm(context.getAddress());
@@ -55,7 +55,7 @@ public class AddressBookSteps {
      * Verifies if address appears on address book entries table.
      */
     @When("the address appears on Address Book Entries table")
-    public void theAddressAppearsOnAddressBookEntriesTable() {
+    public void verifyIfAddressIsOnAddressBook() {
         addressBookPage = new AddressBookPage();
         Assert.assertTrue(addressBookPage.isAddressInTable(context.getAddress()));
     }

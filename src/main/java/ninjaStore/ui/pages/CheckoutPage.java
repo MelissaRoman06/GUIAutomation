@@ -24,27 +24,15 @@ import org.openqa.selenium.support.FindBy;
 public class CheckoutPage extends BasePage {
 
     /**
-     * First name label on billing details forms.
-     */
-    @FindBy(css = ".form-group:nth-child(1) > .col-sm-2")
-    private WebElement firstNameLabel;
-
-    /**
-     * First name label on billing details forms.
-     */
-    @FindBy(css = ".panel:nth-child(1) .panel-title")
-    private WebElement firstSubtitle;
-
-    /**
      * Checkout options.
      */
-    @FindBy(xpath = "//a[contains(.,'Step 1: Checkout Options ')]")
+    @FindBy(xpath = "//a[@href='#collapse-checkout-option']")
     private WebElement checkoutOptionsSubtitle;
 
     /**
      * Billing details.
      */
-    @FindBy(xpath = "//a[contains(.,'Step 2: Billing Details ')]")
+    @FindBy(xpath = "//a[@href='#collapse-payment-address']")
     private WebElement billingDetailsSubtitle;
 
     /**

@@ -23,12 +23,12 @@ import org.openqa.selenium.support.FindBy;
  * @version 1.0
  */
 public class HomePage extends BasePage {
-    private By alert = By.cssSelector(".alert");
 
     /**
      * MacBook's add to cart button.
      */
-    @FindBy(xpath = "//div[@id='content']/div[2]/div[1]/div/div[3]/button[1]")
+    @FindBy(xpath = "//a[contains(text(),'MacBook')]/ancestor::div[@class='caption']"
+            + "/following-sibling::div //i[@class='fa fa-shopping-cart']")
     private WebElement macBookAddToCartButton;
 
     /**

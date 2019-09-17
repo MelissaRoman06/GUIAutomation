@@ -28,15 +28,22 @@ public class CommonSteps {
     private HeaderPage headerPage;
     private Context context;
 
-    public CommonSteps(Context context) {
+    /**
+     * Initializes the class setting the context.
+     *
+     * @param context - Context to be set.
+     */
+    public CommonSteps(final Context context) {
         this.context = context;
     }
 
     /**
      * Navigates to given page.
+     *
+     * @param pageName - Page name to redirect.
      */
     @When("the user goes to (.*) page")
-    public void goToPage(String pageName) {
+    public void goToPage(final String pageName) {
         PageTransporter.goToPage(pageName);
     }
 
@@ -46,7 +53,7 @@ public class CommonSteps {
      * @param alertMessage - Expected alert message.
      */
     @Then("an alert (.*) is displayed")
-    public void verifyAlert(String alertMessage) {
+    public void verifyAlert(final String alertMessage) {
         headerPage = new HeaderPage();
         String actual = headerPage.getAlertMessageText();
         Assert.assertEquals(actual.replaceAll(context.getProduct().getProductName() + " ", ""),
