@@ -119,4 +119,13 @@ public class Address {
                 + country;
         return concatenatedAddress;
     }
+
+    /**
+     * Allows to get Full Name by concatenating first name and last name.
+     *
+     * @return - Full name.
+     */
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }

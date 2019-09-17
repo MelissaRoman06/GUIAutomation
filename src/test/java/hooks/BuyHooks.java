@@ -33,7 +33,7 @@ public class BuyHooks {
      *
      * @param context - Context to be set.
      */
-    public BuyHooks(Context context) {
+    public BuyHooks(final Context context) {
         driver = WebDriverManager.getInstance().getWebDriver();
         this.context = context;
     }

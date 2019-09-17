@@ -47,7 +47,7 @@ public class CommonHooks {
      * @param scenario - Scenario to test.
      */
     @After
-    public void takeScreenshot(Scenario scenario) {
+    public void takeScreenshot(final Scenario scenario) {
         if (scenario.isFailed()) {
             final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot, "image/png");
@@ -63,7 +63,7 @@ public class CommonHooks {
         headerPage = new HeaderPage();
         headerPage.dropDownAccountMenu();
         try {
-            if("Login".equals(headerPage.getLoginText())) {
+            if ("Login".equals(headerPage.getLoginText())) {
                 headerPage.pressLogin();
                 loginPage = new LoginPage();
                 loginPage.login(NinjaStoreConfig.getInstance().getCredentials("email"),
@@ -82,7 +82,7 @@ public class CommonHooks {
         headerPage = new HeaderPage();
         headerPage.dropDownAccountMenu();
         try {
-            if("Logout".equals(headerPage.getLogoutText())) {
+            if ("Logout".equals(headerPage.getLogoutText())) {
                 headerPage.pressLogout();
             }
         } catch (Exception e) {

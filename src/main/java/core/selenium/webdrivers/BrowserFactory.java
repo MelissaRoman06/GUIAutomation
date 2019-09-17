@@ -21,14 +21,15 @@ import java.util.Map;
  * @version 1.0
  */
 public abstract class BrowserFactory {
-    private static Map<String, IBrowser> browsers = new HashMap<>();
+    private static final Map<String, IBrowser> BROWSERS = new HashMap<>();
 
     /**
      * The map has the corresponding browser to the key.
+     * The key is the browser name.
      */
     static {
-        browsers.put("chrome", new Chrome());
-        browsers.put("firefox", new Firefox());
+        BROWSERS.put("chrome", new Chrome());
+        BROWSERS.put("firefox", new Firefox());
     }
 
     /**
@@ -38,6 +39,6 @@ public abstract class BrowserFactory {
      * @return - The instance of required browser.
      */
     public static IBrowser getBrowser(final String browserName) {
-        return browsers.get(browserName);
+        return BROWSERS.get(browserName);
     }
 }

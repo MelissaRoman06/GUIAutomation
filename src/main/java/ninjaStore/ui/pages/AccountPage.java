@@ -26,7 +26,7 @@ public class AccountPage extends BasePage {
     /**
      * Finds tittle on account page.
      */
-    @FindBy(xpath = "//h2[contains(.,'My Account')]")
+    @FindBy(xpath = "//h2[text()='My Account']")
     private WebElement myAccountSubtitle;
 
     /**

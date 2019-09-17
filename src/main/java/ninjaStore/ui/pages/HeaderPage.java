@@ -46,14 +46,6 @@ public class HeaderPage extends BasePage {
     private static WebElement loginButton;
 
     /**
-     * Allows to logout.
-     */
-    public void logout() {
-        accountDropDownMenu.click();
-        logoutButton.click();
-    }
-
-    /**
      * Drops down account menu.
      */
     public void dropDownAccountMenu() {

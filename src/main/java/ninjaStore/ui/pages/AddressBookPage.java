@@ -15,7 +15,6 @@ import ninjaStore.entities.Address;
 import ninjaStore.ui.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * AddressBookPage class models the used WebElements and actions for that page.
@@ -24,19 +23,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * @version 1.0
  */
 public class AddressBookPage extends BasePage {
-    private By alert = By.cssSelector(".alert");
-    private By tableXpath = By.xpath("//div[@id='content']/div[1]/table/tbody/tr");
+    private static final String ADDRESS_CELL_LOCATOR = "//td[text()='%s']"; // Used to find where address is located.
+                                                                // It only finds the first appearance of the address.
+    private static final String ANCESTOR_SUFFIX_TR = "/ancestor::tr"; // Used to find row from cell in table.
 
-    /**
-     * Gets alert message text.
-     *
-     * @return - Alert message text.
-     */
-    public String getAlertMessageText() {
-        WebElement alertMessage = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(alert));
-        return alertMessage.getText();
-    }
+    private By deleteButtonLocation = By.cssSelector("a[href*='delete']"); // Used to find the delete button from
+                                                                            // address row.
 
     /**
      * Verifies if given address is in address entries book.
@@ -45,16 +37,32 @@ public class AddressBookPage extends BasePage {
      * @return - True if the address is found.
      */
     public boolean isAddressInTable(final Address address) {
-        boolean isFound = false;
-        int cantRows = driver.findElements(tableXpath).size();
-        for (int index = 1; index <= cantRows; index++) {
-            String xpathByIndex = String.format("//div[@id='content']/div[1]/table/tbody/tr[%d]/td[1]", index);
-            if (driver.findElement(By.xpath(xpathByIndex)).getText().equals(address.getAddressString())) {
-                isFound = true;
-                break;
-            }
-        }
-        return isFound;
+        WebElement addressCell = getAddressCellElementByAddress(address);
+        return addressCell.getText().equals(address.getAddressString());
+    }
+
+    /**
+     * Allows to get the cell web element where the address is according to its full name.
+     * It only finds the first appearance of the address.
+     *
+     * @param address - Address to be found.
+     * @return - Cell web element where the address appears.
+     */
+    private WebElement getAddressCellElementByAddress(final Address address) {
+        return driver.findElement(By.xpath(String.format(ADDRESS_CELL_LOCATOR, address.getFullName())));
+    }
+
+    /**
+     * Allows to get the row web element where the address is according to its full name.
+     * It only finds the first appearance of the address.
+     * Returns the ancestor of the cell where address is found.
+     *
+     * @param address - Address to be found.
+     * @return - Row web element where the address appears.
+     */
+    private WebElement getAddressRowElementByAddress(final Address address) {
+        return driver.findElement(By.xpath(String.format(ADDRESS_CELL_LOCATOR, address.getFullName())
+                + ANCESTOR_SUFFIX_TR));
     }
 
     /**
@@ -63,15 +71,8 @@ public class AddressBookPage extends BasePage {
      * @param address - Address to be deleted.
      */
     public void deleteAddress(final Address address) {
-        int cantRows = driver.findElements(tableXpath).size();
-        for (int index = 1; index <= cantRows; index++) {
-            String xpathByIndex = String.format("//div[@id='content']/div[1]/table/tbody/tr[%d]/td[1]", index);
-            if (driver.findElement(By.xpath(xpathByIndex)).getText().equals(address.getAddressString())) {
-                String deleteXpath = String.format("//div[@id='content']/div[1]/table/tbody/tr[%d]/td[2] "
-                        + "//a[@class='btn btn-danger']", index);
-                driver.findElement(By.xpath(deleteXpath)).click();
-                break;
-            }
-        }
+        WebElement addressRow = getAddressRowElementByAddress(address);
+        WebElement deleteButton = addressRow.findElement(deleteButtonLocation);
+        deleteButton.click();
     }
 }

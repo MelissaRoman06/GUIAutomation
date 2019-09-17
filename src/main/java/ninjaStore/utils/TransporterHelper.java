@@ -21,10 +21,11 @@ import java.util.Map;
  * @version 1.0
  */
 public abstract class TransporterHelper {
-    private final static Map<String, String> URL_SUFFIX = new HashMap<>();
+    private static final Map<String, String> URL_SUFFIX = new HashMap<>();
 
     /**
      * The map has the corresponding URL suffix to the key.
+     * The key is the page name.
      */
     static {
         URL_SUFFIX.put("login", "account/login");

@@ -25,19 +25,19 @@ import org.openqa.selenium.support.FindBy;
  * @version 1.0
  */
 public class CartPage extends BasePage {
-    private By tableXpath = By.xpath("//div[@id='content']/form/div/table/tbody/tr");
-
+    private static final String PRODUCT_CELL_LOCATOR = "//a[text()='%s']"; // Used to find the cell where product
+                                                                            // is located.
+    private static final String ANCESTOR_SUFFIX_TR = "/ancestor::td/ancestor::tr"; // Used to find the row from cell
+                                                                                    // in table.
+    private static final String QTTY_PRODUCT_TEXTBOX_SUFFIX = "//div//input"; // Used to find the quantity text box
+                                                                            // from row.
+    private static final String QTTY_UPDATE_BUTTON_SUFFIX = "//div//button[@data-original-title='Update']"; // Used to
+                                                                            // find update quantity button from row.
     /**
      * Checkout button.
      */
     @FindBy(xpath = "//a[contains(text(),'Checkout')]")
     private WebElement checkoutButton;
-
-    /**
-     * Empty cart label.
-     */
-    @FindBy(xpath = "//p[@id='content']")
-    private WebElement emptyCartLabel;
 
     /**
      * Verifies if given product is in cart table.
@@ -46,16 +46,52 @@ public class CartPage extends BasePage {
      * @return - True if the product is found.
      */
     public boolean isProductInCartTable(final Product product) {
-        boolean isFound = false;
-        int cantRows = driver.findElements(tableXpath).size();
-        for (int index = 1; index <= cantRows; index++) {
-            String xpathByIndex = String.format("//*[@id='content']/form/div/table/tbody/tr[%d]/td[2]/a", index);
-            if (driver.findElement(By.xpath(xpathByIndex)).getText().equals(product.getProductName())) {
-                isFound = true;
-                break;
-            }
-        }
-        return isFound;
+        WebElement productCell = getProductCellElementByProductName(product);
+        return productCell.getAttribute("textContent").equals(product.getProductName());
+    }
+
+    /**
+     * Allows to get the cell web element where the product is according on product name.
+     *
+     * @param product - Product to be found.
+     * @return - Cell web element where the product appears.
+     */
+    public WebElement getProductCellElementByProductName(final Product product) {
+        return driver.findElement(By.xpath(String.format(PRODUCT_CELL_LOCATOR, product.getProductName())));
+    }
+
+    /**
+     * Allows to get the row web element where the product is according to its product name.
+     *
+     * @param product - Product to be found.
+     * @return - Row web element where the product appears.
+     */
+    public WebElement getProductRowElementByProductName(final Product product) {
+        return driver.findElement(By.xpath(String.format(PRODUCT_CELL_LOCATOR, product.getProductName())
+                + ANCESTOR_SUFFIX_TR));
+    }
+
+    /**
+     * Allows to get the quantity text box web element correspondent to the given product according to its product name.
+     *
+     * @param product - Product to be found.
+     * @return - Quantity text box web element correspondent to the given product.
+     */
+    public WebElement getQuantityTextBoxByProduct(final Product product) {
+        return driver.findElement(By.xpath(String.format(PRODUCT_CELL_LOCATOR, product.getProductName())
+                + ANCESTOR_SUFFIX_TR + QTTY_PRODUCT_TEXTBOX_SUFFIX));
+    }
+
+    /**
+     * Allows to get the update quantity button web element correspondent to the given product according
+     * to its product name.
+     *
+     * @param product - Product to be found.
+     * @return - Update quantity button web element correspondent to the given product.
+     */
+    public WebElement getQuantityUpdateButtonByProduct(final Product product) {
+        return driver.findElement(By.xpath(String.format(PRODUCT_CELL_LOCATOR, product.getProductName())
+                + ANCESTOR_SUFFIX_TR + QTTY_UPDATE_BUTTON_SUFFIX));
     }
 
     /**
@@ -66,34 +102,16 @@ public class CartPage extends BasePage {
     }
 
     /**
-     * Allows to get the text from emptyCart label.
-     *
-     * @return Empty card label text.
-     */
-    public String getEmptyCartLabelText() {
-        return emptyCartLabel.getText();
-    }
-
-    /**
      * Removes one element of given product from cart.
      *
      * @param product - Product to remove.
      */
     public void deleteFromCart(final Product product) {
-        int cantRows = driver.findElements(tableXpath).size();
-        for (int index = 1; index <= cantRows; index++) {
-            String xpathByIndex = String.format("//*[@id='content']/form/div/table/tbody/tr[%d]/td[2]/a", index);
-            if (driver.findElement(By.xpath(xpathByIndex)).getText().equals(product.getProductName())) {
-                String deleteXpath = String.format("//*[@id='content']/form/div/table/tbody/tr[%d]/td[4]/div/input",
-                        index);
-                String qttyProduct = driver.findElement(By.xpath(deleteXpath)).getAttribute("value");
-                int updatedQtty = Integer.parseInt(qttyProduct) - 1;
-                WebDriverHelper.enterKeys(driver.findElement(By.xpath(deleteXpath)), Integer.toString(updatedQtty));
-                String buttonXpath = String.format("//*[@id='content']/form/div/table/tbody/tr[%d]/td[4]/div/span"
-                        + "/button[1]", index);
-                driver.findElement(By.xpath(buttonXpath)).click();
-                break;
-            }
-        }
+        WebElement qttyTextBox = getQuantityTextBoxByProduct(product);
+        String qttyProduct = qttyTextBox.getAttribute("value");
+        int updatedQtty = Integer.parseInt(qttyProduct) - 1;
+        WebDriverHelper.enterKeys(qttyTextBox, Integer.toString(updatedQtty));
+        WebElement qttyUpdateButton = getQuantityUpdateButtonByProduct(product);
+        qttyUpdateButton.click();
     }
 }
