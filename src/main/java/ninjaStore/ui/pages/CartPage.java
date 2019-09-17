@@ -36,7 +36,7 @@ public class CartPage extends BasePage {
     /**
      * Checkout button.
      */
-    @FindBy(xpath = "//a[contains(text(),'Checkout')]")
+    @FindBy(xpath = "//a[text()='Checkout']")
     private WebElement checkoutButton;
 
     /**

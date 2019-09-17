@@ -73,7 +73,7 @@ public class AddAddressPage extends BasePage {
     /**
      * Continue button.
      */
-    @FindBy(xpath = "//div[@id='content']/form/div/div[2]/input")
+    @FindBy(xpath = "//input[@value='Continue']")
     private WebElement continueButton;
 
     /**

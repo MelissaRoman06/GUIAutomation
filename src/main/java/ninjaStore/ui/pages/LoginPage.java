@@ -39,7 +39,7 @@ public class LoginPage extends BasePage {
     /**
      * Finds the login button.
      */
-    @FindBy(css = ".btn:nth-child(3)")
+    @FindBy(xpath = "//input[@value='Login']")
     private WebElement loginButton;
 
     /**

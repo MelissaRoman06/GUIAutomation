@@ -30,19 +30,19 @@ public class HeaderPage extends BasePage {
     /**
      * Finds account drop down menu.
      */
-    @FindBy(css = ".dropdown .hidden-xs")
+    @FindBy(xpath = "//a[@title='My Account']")
     private static WebElement accountDropDownMenu;
 
     /**
      * Finds logout option on drop down menu.
      */
-    @FindBy(linkText = "Logout")
+    @FindBy(xpath = "//a[text()='Logout']")
     private static WebElement logoutButton;
 
     /**
      * Finds login option on drop down menu.
      */
-    @FindBy(linkText = "Login")
+    @FindBy(xpath = "//a[text()='Login']")
     private static WebElement loginButton;
 
     /**
@@ -58,7 +58,7 @@ public class HeaderPage extends BasePage {
      * @return Text from logout button.
      */
     public String getLogoutText() {
-        return logoutButton.getText();
+        return logoutButton.getAttribute("textContent");
     }
 
     /**
@@ -81,7 +81,7 @@ public class HeaderPage extends BasePage {
      * @return Text from login button.
      */
     public String getLoginText() {
-        return loginButton.getText();
+        return loginButton.getAttribute("textContent");
     }
 
     /**
