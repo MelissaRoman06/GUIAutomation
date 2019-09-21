@@ -17,7 +17,14 @@ package ninjaStore.utils;
  * @author Melissa Román
  * @version 1.0
  */
-public abstract class StringHelper {
+public final class StringHelper {
+
+    /**
+     * Private constructor requested by checkstyle.
+     */
+    private StringHelper() {
+
+    }
 
     /**
      * Allows to get string until line break.

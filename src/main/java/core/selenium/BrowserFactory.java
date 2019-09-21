@@ -9,7 +9,11 @@
  * accordance with the terms of the license agreement you entered into
  * with Jala Foundation.
  */
-package core.selenium.webdrivers;
+package core.selenium;
+
+import core.selenium.webdrivers.Chrome;
+import core.selenium.webdrivers.Firefox;
+import core.selenium.webdrivers.IBrowser;
 
 import java.util.HashMap;
 import java.util.Map;

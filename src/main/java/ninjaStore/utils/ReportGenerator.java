@@ -25,7 +25,14 @@ import java.util.List;
  * @author Melissa Román
  * @version 1.0
  */
-public abstract class ReportGenerator {
+public final class ReportGenerator {
+
+    /**
+     * Private constructor requested by checkstyle.
+     */
+    private ReportGenerator() {
+
+    }
 
     /**
      * Sets up and creates the cucumber report.

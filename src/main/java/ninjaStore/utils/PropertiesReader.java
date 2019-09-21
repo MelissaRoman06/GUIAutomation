@@ -22,7 +22,14 @@ import java.util.Properties;
  * @author Melissa Román
  * @version 1.0
  */
-public abstract class PropertiesReader {
+public final class PropertiesReader {
+
+    /**
+     * Private constructor requested by checkstyle.
+     */
+    private PropertiesReader() {
+
+    }
 
     /**
      * Allows to get properties from properties file.

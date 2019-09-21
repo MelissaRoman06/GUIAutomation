@@ -19,7 +19,14 @@ import org.openqa.selenium.WebElement;
  * @author Melissa Román
  * @version 1.0
  */
-public abstract class WebDriverHelper {
+public final class WebDriverHelper {
+
+    /**
+     * Private constructor requested by checkstyle.
+     */
+    private WebDriverHelper() {
+
+    }
 
     /**
      * Enters string into given web element. This will be moved to a util class.

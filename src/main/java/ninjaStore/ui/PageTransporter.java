@@ -21,8 +21,15 @@ import org.openqa.selenium.WebDriver;
  * @author Melissa Román
  * @version 1.0
  */
-public abstract class PageTransporter {
+public final class PageTransporter {
     private static final WebDriver WEB_DRIVER = WebDriverManager.getInstance().getWebDriver();
+
+    /**
+     * Private constructor requested by checkstyle.
+     */
+    private PageTransporter() {
+
+    }
 
     /**
      * Navigates to given page.

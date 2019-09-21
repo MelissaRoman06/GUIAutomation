@@ -13,7 +13,6 @@ package core.selenium;
 
 import java.util.concurrent.TimeUnit;
 
-import core.selenium.webdrivers.BrowserFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 

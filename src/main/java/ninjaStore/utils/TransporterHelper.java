@@ -20,9 +20,15 @@ import java.util.Map;
  * @author Melissa Román
  * @version 1.0
  */
-public abstract class TransporterHelper {
+public final class TransporterHelper {
     private static final Map<String, String> URL_SUFFIX = new HashMap<>();
 
+    /**
+     * Private constructor requested by checkstyle.
+     */
+    private TransporterHelper() {
+
+    }
     /**
      * The map has the corresponding URL suffix to the key.
      * The key is the page name.
